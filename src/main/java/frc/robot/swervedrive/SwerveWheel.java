@@ -30,7 +30,7 @@ public class SwerveWheel extends TimedPID {
   private final Point2 unitTangent;
 
   public SwerveWheel(DoubleConsumer driveMotorConsumer, DoubleSupplier pivotEncoderSupplier, DoubleConsumer pivotMotorConsumer, double locationX, double locationY) {
-    super(0.015, 0.001, 0.0025, 1, 360, 20);
+    super(0.015, 0.001, 0.0020, 1, 360, 20);
 
     this.driveMotorConsumer = driveMotorConsumer;
     this.pivotEncoderSupplier = pivotEncoderSupplier;
