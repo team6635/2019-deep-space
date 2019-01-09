@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.swervedrive.SwerveDrive;
 import frc.robot.swervedrive.SwerveWheel;
@@ -16,18 +17,20 @@ public final class RobotMap {
   public static final AnalogGyro gyro = new AnalogGyro(0);
 
   // Front left wheel
-  public static final VictorSPX motorPivotFrontLeft = new VictorSPX(1);
-  public static final VictorSPX motorDriveFrontLeft = new VictorSPX(2);
-  public static final SwerveWheel wheelFrontLeft = new SwerveWheel((double driveSpeed) -> {
-    motorDriveFrontLeft.set(ControlMode.PercentOutput, driveSpeed);
+  public static final VictorSPX motorPivotRearLeft = new VictorSPX(1);
+  public static final VictorSPX motorDriveRearLeft = new VictorSPX(2);
+  public static final Encoder encoderPivotRearLeft = new Encoder(0, 1);
+  public static final SwerveWheel wheelRearLeft = new SwerveWheel((double driveSpeed) -> {
+    motorDriveRearLeft.set(ControlMode.PercentOutput, driveSpeed);
   }, () -> {
-    return motorPivotFrontLeft.getSelectedSensorPosition();
+    // return motorPivotRearLeft.getSelectedSensorPosition();
+    return encoderPivotRearLeft.getDistance();
   }, (double pivotSpeed) -> {
-    motorPivotFrontLeft.set(ControlMode.PercentOutput, pivotSpeed);
-  }, -13, 11);
+    motorPivotRearLeft.set(ControlMode.PercentOutput, pivotSpeed);
+  }, -10.5, -11);
 
   public static final SwerveWheel[] wheels = {
-    wheelFrontLeft,
+    wheelRearLeft,
   };
 
   public static final SwerveDrive swerveDrive = new SwerveDrive(wheels, gyro);
