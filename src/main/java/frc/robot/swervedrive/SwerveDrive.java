@@ -1,6 +1,7 @@
 package frc.robot.swervedrive;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.swervedrive.SwerveMath.SwerveResult;
 
 /**
@@ -26,6 +27,7 @@ public class SwerveDrive {
     } else {
       for (int i = 0; i < wheels.length; i++) {
         SwerveResult calculated = wheels[i].calculate(xInput, yInput, zInput);
+        SmartDashboard.putNumber("Wheel " + i + " target angle", calculated.angle);
         wheels[i].setSetpoint(calculated.angle);
         speeds[i] = calculated.speed;
       }

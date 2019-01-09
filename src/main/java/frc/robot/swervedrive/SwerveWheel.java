@@ -5,7 +5,7 @@ import java.util.function.DoubleSupplier;
 
 import frc.robot.pid.TimedPID;
 import frc.robot.swervedrive.SwerveMath.Point2;
-import frc.robot.swervedrive.SwerveMath.SwerveResult;;
+import frc.robot.swervedrive.SwerveMath.SwerveResult;
 
 /**
  * Represents a single swerve drive wheel module, including the
