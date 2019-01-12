@@ -42,12 +42,32 @@ public class SwerveWheel extends SwervePID {
 
   @Override
   public double pidInputProvider() {
-    return SwerveMath.normalizeAngle(pivotEncoderSupplier.getAsDouble());
+    return getEncoderAngle();
   }
 
   @Override
   public void pidUseOutput(double output) {
-    pivotMotorConsumer.accept(output);
+    pivotMotor(output);
+  }
+
+  /**
+   * Calls {@code driveMotorConsumer} with the specified speed.
+   * @param speed The speed to pass to {@code driveMotorConsumer}
+   */
+  public void driveMotor(double speed) {
+    driveMotorConsumer.accept(speed);
+  }
+
+  /**
+   * Calls {@code pivotMotorConsumer} with the specified speed.
+   * @param speed The speed to pass to {@code pivotMotorConsumer}
+   */
+  public void pivotMotor(double speed) {
+    pivotMotorConsumer.accept(speed);
+  }
+
+  public double getEncoderAngle() {
+    return SwerveMath.normalizeAngle(pivotEncoderSupplier.getAsDouble());
   }
 
   /**
@@ -56,28 +76,7 @@ public class SwerveWheel extends SwervePID {
    */
   public void brake() {
     setSetpoint(pidInputProvider());
-    driveMotorConsumer.accept(0);
-  }
-
-  /**
-   * @return the drive motor's consumer
-   */
-  public DoubleConsumer getDriveMotorConsumer() {
-    return driveMotorConsumer;
-  }
-
-  /**
-   * @return the pivot encoder's supplier
-   */
-  public DoubleSupplier getPivotEncoderSupplier() {
-    return pivotEncoderSupplier;
-  }
-
-  /**
-   * @return the pivot motor's consumer
-   */
-  public DoubleConsumer getPivotMotorConsumer() {
-    return pivotMotorConsumer;
+    driveMotor(0);
   }
 
   public Point2 getUnitTangent() {

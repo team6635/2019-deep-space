@@ -52,7 +52,7 @@ public class SwerveDrive {
     }
 
     for (int i = 0; i < wheels.length; i++) {
-      wheels[i].getDriveMotorConsumer().accept(speeds[i]);
+      wheels[i].driveMotor(speeds[i]);
     }
   }
   
