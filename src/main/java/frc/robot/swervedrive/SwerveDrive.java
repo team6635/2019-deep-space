@@ -38,7 +38,7 @@ public class SwerveDrive {
         //     speed = -speed
         // target %= 360
 
-        if (Math.abs(wheel.pidInputProvider() - angle) > 90) {
+        if (Math.abs(wheel.getPIDInput() - angle) > 90) {
           angle += 180;
           speed = -speed;
         }

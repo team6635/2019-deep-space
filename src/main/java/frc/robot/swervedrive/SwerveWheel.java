@@ -3,7 +3,7 @@ package frc.robot.swervedrive;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
 
-import frc.robot.pid.SwervePID;
+import frc.robot.pid.TimedPID;
 import frc.robot.swervedrive.SwerveMath.Point2;
 
 /**
@@ -19,7 +19,7 @@ import frc.robot.swervedrive.SwerveMath.Point2;
  * methods. Such as {@code (double s) -> talon.set(Percent, s)} for 
  * the motors.
  */
-public class SwerveWheel extends SwervePID {
+public class SwerveWheel extends TimedPID {
   private DoubleConsumer driveMotorConsumer;
   private DoubleSupplier pivotEncoderSupplier;
   private DoubleConsumer pivotMotorConsumer;
@@ -29,7 +29,7 @@ public class SwerveWheel extends SwervePID {
   private final Point2 unitTangent;
 
   public SwerveWheel(DoubleConsumer driveMotorConsumer, DoubleSupplier pivotEncoderSupplier, DoubleConsumer pivotMotorConsumer, double locationX, double locationY) {
-    super(0.015, 0.001, 0.0020, 20, 1);
+    super(0.015, 0.001, 0.002, 1, 360, 20);
 
     this.driveMotorConsumer = driveMotorConsumer;
     this.pivotEncoderSupplier = pivotEncoderSupplier;
@@ -41,12 +41,12 @@ public class SwerveWheel extends SwervePID {
   }
 
   @Override
-  public double pidInputProvider() {
+  public double getPIDInput() {
     return getEncoderAngle();
   }
 
   @Override
-  public void pidUseOutput(double output) {
+  public void usePIDOutput(double output) {
     pivotMotor(output);
   }
 
@@ -75,7 +75,7 @@ public class SwerveWheel extends SwervePID {
    * output.
    */
   public void brake() {
-    setSetpoint(pidInputProvider());
+    setSetpoint(getPIDInput());
     driveMotor(0);
   }
 
