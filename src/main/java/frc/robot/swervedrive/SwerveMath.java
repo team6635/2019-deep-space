@@ -12,7 +12,7 @@ public class SwerveMath {
   }
 
   public static double normalizeAngle(double input) {
-    if (input < 360) {
+    if (input < 0) {
       return (input % 360) + 360;
     } else {
       return input % 360;
