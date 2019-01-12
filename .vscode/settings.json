@@ -12,5 +12,8 @@
   },
   "wpilib.online": true,
   "editor.wordWrap": "on",
-  "editor.wrappingIndent": "none"
+  "editor.wrappingIndent": "none",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true
 }
