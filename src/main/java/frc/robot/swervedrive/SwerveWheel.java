@@ -3,6 +3,7 @@ package frc.robot.swervedrive;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
 
+import frc.robot.pid.SwervePID;
 import frc.robot.pid.TimedPID;
 import frc.robot.swervedrive.SwerveMath.Point2;
 import frc.robot.swervedrive.SwerveMath.SwerveResult;
@@ -20,7 +21,7 @@ import frc.robot.swervedrive.SwerveMath.SwerveResult;
  * methods. Such as {@code (double s) -> victor.set(Percent, s)} for 
  * the motors.
  */
-public class SwerveWheel extends TimedPID {
+public class SwerveWheel extends SwervePID {
   private DoubleConsumer driveMotorConsumer;
   private DoubleSupplier pivotEncoderSupplier;
   private DoubleConsumer pivotMotorConsumer;
@@ -30,7 +31,7 @@ public class SwerveWheel extends TimedPID {
   private final Point2 unitTangent;
 
   public SwerveWheel(DoubleConsumer driveMotorConsumer, DoubleSupplier pivotEncoderSupplier, DoubleConsumer pivotMotorConsumer, double locationX, double locationY) {
-    super(0.015, 0.001, 0.0020, 1, 360, 20);
+    super(0.015, 0.001, 0.0020, 20, 1);
 
     this.driveMotorConsumer = driveMotorConsumer;
     this.pivotEncoderSupplier = pivotEncoderSupplier;
@@ -41,25 +42,9 @@ public class SwerveWheel extends TimedPID {
     this.unitTangent = Point2.div(tangent, tangent.magnitude());
   }
 
-  public SwerveResult calculate(double xInput, double yInput, double zInput) {
-    Point2 r = Point2.multiply(unitTangent, zInput);
-    Point2 result = Point2.add(r, new Point2(xInput, yInput));
-
-    double angle = Math.atan2(result.y, result.x) * (180 / Math.PI) - 90 % 360;
-    double speed = result.magnitude();
-
-    return new SwerveResult(angle, speed);
-  }
-
-  @Override
-  public double getPIDInput() {
-    // return ((encoderPivot.getDistance() % 360) + 360) % 360;
-    return ((pivotEncoderSupplier.getAsDouble() % 360) + 360) % 360;
-  }
-
-  @Override
-  public void usePIDOutput(double output) {
-    pivotMotorConsumer.accept(output);
+  public void brake() {
+    setSetpoint(pidInputProvider());
+    driveMotorConsumer.accept(0);
   }
 
   /**
@@ -81,5 +66,19 @@ public class SwerveWheel extends TimedPID {
    */
   public DoubleConsumer getPivotMotorConsumer() {
     return pivotMotorConsumer;
+  }
+
+  public Point2 getUnitTangent() {
+    return unitTangent;
+  }
+
+  @Override
+  public double pidInputProvider() {
+    return SwerveMath.normalizeAngle(pivotEncoderSupplier.getAsDouble());
+  }
+
+  @Override
+  public void pidUseOutput(double output) {
+    pivotMotorConsumer.accept(output);
   }
 }

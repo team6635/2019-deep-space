@@ -11,6 +11,14 @@ public class SwerveMath {
     return max;
   }
 
+  public static double normalizeAngle(double input) {
+    if (input < 360) {
+      return (input % 360) + 360;
+    } else {
+      return input % 360;
+    }
+  }
+
   public static void capValuesSymmetrically(double[] arr, double cap) {
     if (arr.length == 0)
       return;

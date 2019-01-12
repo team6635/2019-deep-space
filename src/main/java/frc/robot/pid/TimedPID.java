@@ -17,7 +17,7 @@ public abstract class TimedPID extends PID {
       public void run() {
         timerLoop();
       }
-    }, 0, rate);
+    }, rate, rate);
   }
 
   public abstract double getPIDInput();

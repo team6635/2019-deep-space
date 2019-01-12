@@ -2,6 +2,7 @@ package frc.robot.swervedrive;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.swervedrive.SwerveMath.Point2;
 import frc.robot.swervedrive.SwerveMath.SwerveResult;
 
 /**
@@ -19,17 +20,23 @@ public class SwerveDrive {
   public void drive(double xInput, double yInput, double zInput) {
     double[] speeds = new double[wheels.length];
 
-    if (Math.abs(xInput) + Math.abs(yInput) + Math.abs(zInput) / 3 <= controllerTolerance) {
-      for (int i = 0; i < speeds.length; i++) {
-        speeds[i] = 0;
-        wheels[i].setSetpoint(wheels[i].getPIDInput()); // Brake
+    if ((Math.abs(xInput) + Math.abs(yInput) + Math.abs(zInput)) / 3 <= controllerTolerance) {
+      for (int i = 0; i < wheels.length; i++) {
+        wheels[i].brake();
       }
     } else {
       for (int i = 0; i < wheels.length; i++) {
-        SwerveResult calculated = wheels[i].calculate(xInput, yInput, zInput);
-        SmartDashboard.putNumber("Wheel " + i + " target angle", calculated.angle);
-        wheels[i].setSetpoint(calculated.angle);
-        speeds[i] = calculated.speed;
+        SwerveWheel wheel = wheels[i];
+        Point2 r = Point2.multiply(wheel.getUnitTangent(), zInput);
+        Point2 result = Point2.add(r, new Point2(xInput, yInput));
+
+        double angle = Math.atan2(result.y, result.x) * (180 / Math.PI) - 90 % 360;
+        double speed = result.magnitude();
+
+        // TODO Reverse function
+
+        wheel.setSetpoint(angle);
+        speeds[i] = speed;
       }
 
       SwerveMath.capValuesSymmetrically(speeds, 1.0);
