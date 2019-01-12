@@ -1,9 +1,7 @@
 package frc.robot.swervedrive;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.swervedrive.SwerveMath.Point2;
-import frc.robot.swervedrive.SwerveMath.SwerveResult;
 
 /**
  * A container around swerve wheels.

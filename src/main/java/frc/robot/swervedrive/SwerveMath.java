@@ -125,14 +125,4 @@ public class SwerveMath {
       return Math.hypot(x, y);
     }
   }
-
-  public static final class SwerveResult {
-    public final double angle;
-    public final double speed;
-
-    public SwerveResult(double angle, double speed) {
-      this.angle = angle;
-      this.speed = speed;
-    }
-  }
 }

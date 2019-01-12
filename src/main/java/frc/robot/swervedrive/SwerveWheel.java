@@ -4,9 +4,7 @@ import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
 
 import frc.robot.pid.SwervePID;
-import frc.robot.pid.TimedPID;
 import frc.robot.swervedrive.SwerveMath.Point2;
-import frc.robot.swervedrive.SwerveMath.SwerveResult;
 
 /**
  * Represents a single swerve drive wheel module, including the
@@ -18,7 +16,7 @@ import frc.robot.swervedrive.SwerveMath.SwerveResult;
  * {@code pivotMotorConsumer} should be set the same as the other motor.
  * 
  * <p> Note that if using CAN Talons, etc, these may all be different
- * methods. Such as {@code (double s) -> victor.set(Percent, s)} for 
+ * methods. Such as {@code (double s) -> talon.set(Percent, s)} for 
  * the motors.
  */
 public class SwerveWheel extends SwervePID {
@@ -42,6 +40,20 @@ public class SwerveWheel extends SwervePID {
     this.unitTangent = Point2.div(tangent, tangent.magnitude());
   }
 
+  @Override
+  public double pidInputProvider() {
+    return SwerveMath.normalizeAngle(pivotEncoderSupplier.getAsDouble());
+  }
+
+  @Override
+  public void pidUseOutput(double output) {
+    pivotMotorConsumer.accept(output);
+  }
+
+  /**
+   * Brakes the pivot motor using PID, and zeroes the drive motor
+   * output.
+   */
   public void brake() {
     setSetpoint(pidInputProvider());
     driveMotorConsumer.accept(0);
@@ -70,15 +82,5 @@ public class SwerveWheel extends SwervePID {
 
   public Point2 getUnitTangent() {
     return unitTangent;
-  }
-
-  @Override
-  public double pidInputProvider() {
-    return SwerveMath.normalizeAngle(pivotEncoderSupplier.getAsDouble());
-  }
-
-  @Override
-  public void pidUseOutput(double output) {
-    pivotMotorConsumer.accept(output);
   }
 }
