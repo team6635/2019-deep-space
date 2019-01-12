@@ -4,8 +4,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class TimedPID extends PID {
-  protected final Timer timer = new Timer();
-  protected boolean isEnabled = true;
+  private final Timer timer = new Timer();
+  private boolean isEnabled = true;
 
   public TimedPID(double P, double I, double D, double tolerance, double modulus, long rate) {
     super(P, I, D, tolerance, modulus);

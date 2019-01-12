@@ -52,20 +52,14 @@ public class PID {
     return -(p + i + d);
   }
 
-  public void setP(double P) {
-    this.Kp = P;
+  public void setPIDValues(double P, double I, double D) {
+    Kp = P;
+    Ki = I;
+    Kd = D;
   }
 
-  public void setI(double I) {
-    this.Ki = I;
-  }
-
-  public void setD(double D) {
-    this.Kd = D;
-  }
-
-  public void setTolerance(double tolerance) {
-    this.tolerance = tolerance;
+  public double getSetpoint() {
+    return setpoint;
   }
 
   public void setSetpoint(double setpoint) {
