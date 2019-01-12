@@ -41,7 +41,7 @@ public class DriveTrain extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    // TODO
+    // TODO: Add default command for joystick driving
     // setDefaultCommand(command);
   }
 
