@@ -31,7 +31,18 @@ public class SwerveDrive {
         double angle = Math.atan2(result.y, result.x) * (180 / Math.PI) - 90 % 360;
         double speed = result.magnitude();
 
-        // TODO Reverse function
+        // Reverse function
+        // Pseudocode:
+        // If abs(current - target) > 90:
+        //     target += 180
+        //     speed = -speed
+        // target %= 360
+
+        if (Math.abs(wheel.pidInputProvider() - angle) > 90) {
+          angle += 180;
+          speed = -speed;
+        }
+        angle %= 360;
 
         wheel.setSetpoint(angle);
         speeds[i] = speed;
