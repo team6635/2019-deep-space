@@ -7,25 +7,26 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 import frc.robot.swervedrive.SwerveDrive;
 import frc.robot.swervedrive.SwerveWheel;
 
 public class DriveTrain extends Subsystem {
-  private final AnalogGyro gyro = new AnalogGyro(0);
+  private final AnalogGyro gyro = new AnalogGyro(RobotMap.pGyro);
 
-  private final BaseMotorController motorDriveFL = new VictorSPX(1);
-  private final BaseMotorController motorPivotFL = new VictorSPX(2);
-  private final BaseMotorController motorDriveRL = new VictorSPX(3);
-  private final BaseMotorController motorPivotRL = new VictorSPX(4);
-  private final BaseMotorController motorDriveFR = new VictorSPX(5);
-  private final BaseMotorController motorPivotFR = new VictorSPX(6);
-  private final BaseMotorController motorDriveRR = new VictorSPX(7);
-  private final BaseMotorController motorPivotRR = new VictorSPX(8);
+  private final BaseMotorController motorDriveFL = new VictorSPX(RobotMap.pMotorDriveFrontLeft);
+  private final BaseMotorController motorPivotFL = new VictorSPX(RobotMap.pMotorPivotFrontLeft);
+  private final BaseMotorController motorDriveRL = new VictorSPX(RobotMap.pMotorDriveRearLeft);
+  private final BaseMotorController motorPivotRL = new VictorSPX(RobotMap.pMotorPivotRearLeft);
+  private final BaseMotorController motorDriveFR = new VictorSPX(RobotMap.pMotorDriveFrontRight);
+  private final BaseMotorController motorPivotFR = new VictorSPX(RobotMap.pMotorPivotFrontRight);
+  private final BaseMotorController motorDriveRR = new VictorSPX(RobotMap.pMotorDriveRearRight);
+  private final BaseMotorController motorPivotRR = new VictorSPX(RobotMap.pMotorPivotRearRight);
 
-  private final Encoder encoderFL = new Encoder(0, 1);
-  private final Encoder encoderRL = new Encoder(2, 3);
-  private final Encoder encoderFR = new Encoder(4, 5);
-  private final Encoder encoderRR = new Encoder(6, 7);
+  private final Encoder encoderFL = new Encoder(RobotMap.pEncoderFrontLeft[0], RobotMap.pEncoderFrontLeft[1]);
+  private final Encoder encoderRL = new Encoder(RobotMap.pEncoderRearLeft[0], RobotMap.pEncoderRearLeft[1]);
+  private final Encoder encoderFR = new Encoder(RobotMap.pEncoderFrontRight[0], RobotMap.pEncoderFrontRight[1]);
+  private final Encoder encoderRR = new Encoder(RobotMap.pEncoderRearRight[0], RobotMap.pEncoderRearRight[1]);
 
   private final Wheel wheelFL = new Wheel(motorDriveFL, motorPivotFL, encoderFL, -10.5, 11);
   private final Wheel wheelRL = new Wheel(motorDriveRL, motorPivotRL, encoderRL, -10.5, -11);
