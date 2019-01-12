@@ -1,17 +1,26 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import frc.robot.swervedrive.SwerveDrive;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.Autonomous;
+import frc.robot.subsystems.DriveTrain;
 
 public class Robot extends TimedRobot {
-  private final SwerveDrive drive = RobotMap.swerveDrive;
-  private final XboxController controller = RobotMap.controller;
+  Command auton;
+
+  public static DriveTrain drivetrain;
+  public static OI oi;
 
   @Override
   public void robotInit() {
-    drive.disable();
+    drivetrain = new DriveTrain();
+    oi = new OI();
+
+    auton = new Autonomous();
+
+    SmartDashboard.putData(drivetrain);
   }
 
   @Override
@@ -20,7 +29,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
-    drive.disable();
+    drivetrain.disable();
   }
 
   @Override
@@ -29,24 +38,31 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    drive.enable();
+    auton.start();
   }
 
   @Override
   public void autonomousPeriodic() {
+    Scheduler.getInstance().run();
+    log();
   }
 
   @Override
   public void teleopInit() {
-    drive.enable();
+    auton.cancel();
   }
 
   @Override
   public void teleopPeriodic() {
-    drive.drive(controller.getX(Hand.kRight), controller.getY(Hand.kRight), controller.getX(Hand.kLeft));
+    Scheduler.getInstance().run();
+    log();
   }
 
   @Override
   public void testPeriodic() {
+  }
+
+  private void log() {
+    drivetrain.log();
   }
 }
