@@ -1,6 +1,5 @@
 package frc.robot.swervedrive;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
 import frc.robot.swervedrive.SwerveMath.Point2;
 
 /**
@@ -10,12 +9,16 @@ public class SwerveDrive {
   private SwerveWheel[] wheels;
   private double controllerTolerance = 0.08;
 
-  public SwerveDrive(SwerveWheel[] wheels, AnalogGyro gyro) {
+  public SwerveDrive(SwerveWheel[] wheels) {
     this.wheels = wheels;
-    // TODO: Gyro
   }
 
-  public void drive(double xInput, double yInput, double zInput) {
+  public void drive(double x, double y, double z) {
+    drive(x, y, z, Double.NaN);
+  }
+
+  public void drive(double xInput, double yInput, double zInput, double gyroAngle) {
+    gyroAngle = SwerveMath.normalizeAngle(gyroAngle);
     double[] speeds = new double[wheels.length];
 
     if ((Math.abs(xInput) + Math.abs(yInput) + Math.abs(zInput)) / 3 <= controllerTolerance) {
@@ -23,6 +26,16 @@ public class SwerveDrive {
         wheels[i].brake();
       }
     } else {
+      if (!Double.isNaN(gyroAngle)) {
+        double rawAngle = SwerveMath.normalizeAngle(Math.atan2(yInput, xInput) * (180 / Math.PI) - 90);
+        double rawSpeed = Math.hypot(xInput, yInput);
+
+        double correctedAngle = SwerveMath.normalizeAngle(rawAngle + gyroAngle);
+
+        xInput = Math.cos(correctedAngle + 90) * rawSpeed;
+        yInput = Math.sin(correctedAngle + 90) * rawSpeed;
+      }
+
       for (int i = 0; i < wheels.length; i++) {
         SwerveWheel wheel = wheels[i];
         Point2 r = Point2.multiply(wheel.getUnitTangent(), zInput);
@@ -34,8 +47,8 @@ public class SwerveDrive {
         // Reverse function
         // Pseudocode:
         // If abs(current - target) > 90:
-        //     target += 180
-        //     speed = -speed
+        // target += 180
+        // speed = -speed
         // target %= 360
 
         if (Math.abs(wheel.getPIDInput() - angle) > 90) {
@@ -55,7 +68,7 @@ public class SwerveDrive {
       wheels[i].driveMotor(speeds[i]);
     }
   }
-  
+
   public void disable() {
     for (int i = 0; i < wheels.length; i++) {
       wheels[i].setEnabled(false);

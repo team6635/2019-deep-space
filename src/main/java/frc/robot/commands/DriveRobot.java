@@ -7,7 +7,7 @@ public class DriveRobot extends TimedCommand {
   private double x, y, z;
 
   public DriveRobot(double x, double y, double z, double ms) {
-    super(ms * 1000);
+    super(ms / 1000);
     requires(Robot.drivetrain);
     this.x = x;
     this.y = y;

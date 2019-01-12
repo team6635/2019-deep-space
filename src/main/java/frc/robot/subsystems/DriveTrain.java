@@ -34,10 +34,14 @@ public class DriveTrain extends Subsystem {
   private final Wheel wheelRR = new Wheel(motorDriveRR, motorPivotRR, encoderRR, 10.5, -11);
 
   private final Wheel[] wheels = { wheelFL, wheelRL, wheelFR, wheelRR };
-  private final SwerveDrive swerveDrive = new SwerveDrive(wheels, gyro);
+  private final SwerveDrive swerveDrive = new SwerveDrive(wheels);
 
   public DriveTrain() {
     super();
+    addChild("Encoder FL", encoderFL);
+    addChild("Encoder FR", encoderFR);
+    addChild("Encoder RL", encoderRL);
+    addChild("Encoder RR", encoderRR);
   }
 
   @Override
