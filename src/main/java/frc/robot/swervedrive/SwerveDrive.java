@@ -42,7 +42,7 @@ public class SwerveDrive {
           angle += 180;
           speed = -speed;
         }
-        angle %= 360;
+        angle = SwerveMath.normalizeAngle(angle);
 
         wheel.setSetpoint(angle);
         speeds[i] = speed;
