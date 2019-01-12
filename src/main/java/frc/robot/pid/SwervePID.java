@@ -53,10 +53,6 @@ public abstract class SwervePID {
     } else {
       error = sError;
     }
-
-    // if (Math.abs(error) >= 90 && Math.abs(error) <= 180) {
-    //   error = error + 180 % 360;
-    // }
     
     SmartDashboard.putNumber("Error", error);
     

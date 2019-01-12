@@ -1,7 +1,7 @@
 package frc.robot.pid;
 
 public class PID {
-  protected double P, I, D;
+  protected double Kp, Ki, Kd;
   protected double tolerance;
   protected long lastSample = System.currentTimeMillis();
 
@@ -13,9 +13,9 @@ public class PID {
   protected double modulus;
 
   public PID(double P, double I, double D, double tolerance, double modulus) {
-    this.P = P;
-    this.I = I;
-    this.D = D;
+    this.Kp = P;
+    this.Ki = I;
+    this.Kd = D;
     this.tolerance = tolerance;
     this.modulus = modulus;
   }
@@ -25,14 +25,13 @@ public class PID {
     if (elapsed == 0)
       elapsed = 1;
 
-    double sError = setpoint - measured;
-    double error = sError;
+    double error = setpoint - measured;
 
     if (modulus != Double.NaN && modulus != 0) {
-      if (sError > modulus / 2) {
-        error = sError - modulus;
-      } else if (sError < -modulus / 2) {
-        error = sError + modulus;
+      if (error > modulus / 2) {
+        error -= modulus;
+      } else if (error < -modulus / 2) {
+        error += modulus;
       }
     }
 
@@ -43,26 +42,26 @@ public class PID {
       cyclesSinceZero++;
     }
 
-    double p = P * error;
-    double i = I * (error * cyclesSinceZero);
-    double d = D * (error - lastError / elapsed);
+    double p = Kp * error;
+    double i = Ki * (error * cyclesSinceZero);
+    double d = Kd * (lastError - error / elapsed);
 
     lastError = error;
     lastSample = System.currentTimeMillis();
 
-    return p + i + d;
+    return -(p + i + d);
   }
 
   public void setP(double P) {
-    this.P = P;
+    this.Kp = P;
   }
 
   public void setI(double I) {
-    this.I = I;
+    this.Ki = I;
   }
 
   public void setD(double D) {
-    this.D = D;
+    this.Kd = D;
   }
 
   public void setTolerance(double tolerance) {
