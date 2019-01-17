@@ -9,7 +9,7 @@ public final class RobotMap {
   public static final int pMotorPivotFrontLeft = 2;
 
   public static final int pMotorDriveFrontRight = 3;
-  public static final int pMotorPivotFrontRight = 4;
+  public static final int pMotorPivotFrontRight = 21;
 
   public static final int pMotorDriveRearLeft = 5;
   public static final int pMotorPivotRearLeft = 6;

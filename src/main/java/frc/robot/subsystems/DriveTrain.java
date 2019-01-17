@@ -1,13 +1,16 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.DriveRobotTeleop;
 import frc.robot.swervedrive.SwerveDrive;
 import frc.robot.swervedrive.SwerveWheel;
 
@@ -19,7 +22,7 @@ public class DriveTrain extends Subsystem {
   private final BaseMotorController motorDriveRL = new VictorSPX(RobotMap.pMotorDriveRearLeft);
   private final BaseMotorController motorPivotRL = new VictorSPX(RobotMap.pMotorPivotRearLeft);
   private final BaseMotorController motorDriveFR = new VictorSPX(RobotMap.pMotorDriveFrontRight);
-  private final BaseMotorController motorPivotFR = new VictorSPX(RobotMap.pMotorPivotFrontRight);
+  private final BaseMotorController motorPivotFR = new TalonSRX(RobotMap.pMotorPivotFrontRight);
   private final BaseMotorController motorDriveRR = new VictorSPX(RobotMap.pMotorDriveRearRight);
   private final BaseMotorController motorPivotRR = new VictorSPX(RobotMap.pMotorPivotRearRight);
 
@@ -30,7 +33,7 @@ public class DriveTrain extends Subsystem {
 
   private final Wheel wheelFL = new Wheel(motorDriveFL, motorPivotFL, encoderFL, -10.5, 11);
   private final Wheel wheelRL = new Wheel(motorDriveRL, motorPivotRL, encoderRL, -10.5, -11);
-  private final Wheel wheelFR = new Wheel(motorDriveFR, motorPivotFR, encoderFR, 10.5, 11);
+  private final Wheel wheelFR = new Wheel(motorDriveFR, motorPivotFR, 10.5, 11);
   private final Wheel wheelRR = new Wheel(motorDriveRR, motorPivotRR, encoderRR, 10.5, -11);
 
   private final Wheel[] wheels = { wheelFL, wheelRL, wheelFR, wheelRR };
@@ -48,6 +51,7 @@ public class DriveTrain extends Subsystem {
   protected void initDefaultCommand() {
     // TODO: Add default command for joystick driving
     // setDefaultCommand(command);
+    setDefaultCommand(new DriveRobotTeleop(Robot.oi.getController(), 60 * 2.75 * 1000));
   }
 
   public void log() {
@@ -89,6 +93,11 @@ public class DriveTrain extends Subsystem {
     public Wheel(BaseMotorController drive, BaseMotorController pivot, Encoder pivotEncoder, double x, double y) {
       super((double speed) -> drive.set(ControlMode.PercentOutput, speed), () -> pivotEncoder.getDistance(),
           (double pSpeed) -> pivot.set(ControlMode.PercentOutput, pSpeed), x, y);
+    }
+
+    public Wheel(BaseMotorController drive, BaseMotorController talon, double x, double y) {
+      super((double speed) -> drive.set(ControlMode.PercentOutput, speed), () -> talon.getSelectedSensorPosition(),
+          (double pSpeed) -> talon.set(ControlMode.PercentOutput, pSpeed), x, y);
     }
   }
 }
