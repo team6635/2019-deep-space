@@ -1,106 +1,72 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.DriveRobotTeleop;
-import frc.robot.swervedrive.SwerveDrive;
 import frc.robot.swervedrive.SwerveWheel;
 
+/**
+ * Add your docs here.
+ */
 public class DriveTrain extends Subsystem {
-  private final AnalogGyro gyro = new AnalogGyro(RobotMap.pGyro);
+  private final VictorSPX motorDFL = new VictorSPX(RobotMap.pMotorDriveFrontLeft);
+  private final VictorSPX motorDFR = new VictorSPX(RobotMap.pMotorDriveFrontRight);
+  private final VictorSPX motorDRL = new VictorSPX(RobotMap.pMotorDriveRearLeft);
+  private final VictorSPX motorDRR = new VictorSPX(RobotMap.pMotorDriveRearRight);
+  private final TalonSRX motorPFL = new TalonSRX(RobotMap.pMotorPivotFrontLeft);
+  private final TalonSRX motorPFR = new TalonSRX(RobotMap.pMotorPivotFrontRight);
+  private final TalonSRX motorPRL = new TalonSRX(RobotMap.pMotorPivotRearLeft);
+  private final TalonSRX motorPRR = new TalonSRX(RobotMap.pMotorPivotRearRight);
 
-  private final BaseMotorController motorDriveFL = new VictorSPX(RobotMap.pMotorDriveFrontLeft);
-  private final BaseMotorController motorPivotFL = new VictorSPX(RobotMap.pMotorPivotFrontLeft);
-  private final BaseMotorController motorDriveRL = new VictorSPX(RobotMap.pMotorDriveRearLeft);
-  private final BaseMotorController motorPivotRL = new VictorSPX(RobotMap.pMotorPivotRearLeft);
-  private final BaseMotorController motorDriveFR = new VictorSPX(RobotMap.pMotorDriveFrontRight);
-  private final BaseMotorController motorPivotFR = new TalonSRX(RobotMap.pMotorPivotFrontRight);
-  // private final BaseMotorController motorDriveRR = new
-  // VictorSPX(RobotMap.pMotorDriveRearRight);
-  // private final BaseMotorController motorPivotRR = new
-  // VictorSPX(RobotMap.pMotorPivotRearRight);
-
-  private final Encoder encoderFL = new Encoder(RobotMap.pEncoderFrontLeft[0], RobotMap.pEncoderFrontLeft[1]);
-  private final Encoder encoderRL = new Encoder(RobotMap.pEncoderRearLeft[0], RobotMap.pEncoderRearLeft[1]);
-  private final Encoder encoderFR = new Encoder(RobotMap.pEncoderFrontRight[0], RobotMap.pEncoderFrontRight[1]);
-  private final Encoder encoderRR = new Encoder(RobotMap.pEncoderRearRight[0], RobotMap.pEncoderRearRight[1]);
-
-  private final Wheel wheelFL = new Wheel(motorDriveFL, motorPivotFL, encoderFL, -10.5, 11);
-  private final Wheel wheelRL = new Wheel(motorDriveRL, motorPivotRL, encoderRL, -10.5, -11);
-  private final Wheel wheelFR = new Wheel(motorDriveFR, motorPivotFR, 10.5, 11);
-  // private final Wheel wheelRR = new Wheel(motorDriveRR, motorPivotRR,
-  // encoderRR, 10.5, -11);
-
-  private final Wheel[] wheels = { wheelFL, wheelRL, wheelFR, /* wheelRR */ };
-  private final SwerveDrive swerveDrive = new SwerveDrive(wheels);
-
-  public DriveTrain() {
-    super();
-    addChild("Encoder FL", encoderFL);
-    addChild("Encoder FR", encoderFR);
-    addChild("Encoder RL", encoderRL);
-    addChild("Encoder RR", encoderRR);
-  }
+  private final Wheel wheelFL = new Wheel("WheelFrontLeft", motorDFL, motorPFL, -10, 11);
+  private final Wheel wheelFR = new Wheel("WheelFrontRight", motorDFR, motorPFR, 10, 11);
+  private final Wheel wheelRL = new Wheel("WheelRearLeft", motorDRL, motorPRL, -10, -11);
+  private final Wheel wheelRR = new Wheel("WheelRearRight", motorDFR, motorPRR, 10, -11);
 
   @Override
-  protected void initDefaultCommand() {
-    // TODO: Add default command for joystick driving
-    // setDefaultCommand(command);
-    setDefaultCommand(new DriveRobotTeleop(Robot.oi.getController(), 60 * 2.75 * 1000));
+  public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void log() {
-    // TODO: SmartDashboard logging
-  }
+  private final class Wheel extends PIDSubsystem {
+    private final double relX;
+    private final double relY;
+    private final BaseMotorController driveMotor;
+    private final TalonSRX pivotMotor;
 
-  public void drive(double x, double y, double z) {
-    enable();
-    swerveDrive.drive(x, y, z);
-  }
-
-  public void stop() {
-    swerveDrive.drive(0, 0, 0);
-  }
-
-  public void disable() {
-    stop();
-    swerveDrive.disable();
-  }
-
-  public void enable() {
-    stop();
-    swerveDrive.enable();
-  }
-
-  public double getHeading() {
-    return gyro.getAngle();
-  }
-
-  public void reset() {
-    gyro.reset();
-    encoderFL.reset();
-    encoderFR.reset();
-    encoderRL.reset();
-    encoderRR.reset();
-  }
-
-  private static final class Wheel extends SwerveWheel {
-    public Wheel(BaseMotorController drive, BaseMotorController pivot, Encoder pivotEncoder, double x, double y) {
-      super((double speed) -> drive.set(ControlMode.PercentOutput, speed), () -> pivotEncoder.getDistance(),
-          (double pSpeed) -> pivot.set(ControlMode.PercentOutput, pSpeed), x, y);
+    public Wheel(String name, BaseMotorController drive, TalonSRX pivot, double relX, double relY) {
+      super(name, 0.015, 0.001, 0.002);
+      this.relX = relX;
+      this.relY = relY;
+      this.driveMotor = drive;
+      this.pivotMotor = pivot;
     }
 
-    public Wheel(BaseMotorController drive, BaseMotorController talon, double x, double y) {
-      super((double speed) -> drive.set(ControlMode.PercentOutput, speed), () -> talon.getSelectedSensorPosition(),
-          (double pSpeed) -> talon.set(ControlMode.PercentOutput, pSpeed), x, y);
+    @Override
+    protected void initDefaultCommand() {
+
+    }
+
+    @Override
+    protected void usePIDOutput(double output) {
+
+    }
+
+    @Override
+    protected double returnPIDInput() {
+      return 0;
     }
   }
 }

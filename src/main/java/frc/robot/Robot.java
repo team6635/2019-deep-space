@@ -3,12 +3,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.Autonomous;
 import frc.robot.subsystems.DriveTrain;
 
 public class Robot extends TimedRobot {
-  Command auton;
+  private Command autonomousCommand;
 
   public static DriveTrain drivetrain;
   public static OI oi;
@@ -17,8 +17,6 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     drivetrain = new DriveTrain();
     oi = new OI();
-
-    auton = new Autonomous();
 
     SmartDashboard.putData(drivetrain);
   }
@@ -30,15 +28,18 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     drivetrain.disable();
+    MecanumDrive m;
+    m.driveCartesian(ySpeed, xSpeed, zRotation);
   }
 
   @Override
+
   public void disabledPeriodic() {
   }
 
   @Override
   public void autonomousInit() {
-    auton.start();
+    autonomousCommand.start();
   }
 
   @Override
@@ -49,7 +50,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    auton.cancel();
+    autonomousCommand.cancel();
   }
 
   @Override
