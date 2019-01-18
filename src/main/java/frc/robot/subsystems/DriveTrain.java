@@ -23,8 +23,10 @@ public class DriveTrain extends Subsystem {
   private final BaseMotorController motorPivotRL = new VictorSPX(RobotMap.pMotorPivotRearLeft);
   private final BaseMotorController motorDriveFR = new VictorSPX(RobotMap.pMotorDriveFrontRight);
   private final BaseMotorController motorPivotFR = new TalonSRX(RobotMap.pMotorPivotFrontRight);
-  private final BaseMotorController motorDriveRR = new VictorSPX(RobotMap.pMotorDriveRearRight);
-  private final BaseMotorController motorPivotRR = new VictorSPX(RobotMap.pMotorPivotRearRight);
+  // private final BaseMotorController motorDriveRR = new
+  // VictorSPX(RobotMap.pMotorDriveRearRight);
+  // private final BaseMotorController motorPivotRR = new
+  // VictorSPX(RobotMap.pMotorPivotRearRight);
 
   private final Encoder encoderFL = new Encoder(RobotMap.pEncoderFrontLeft[0], RobotMap.pEncoderFrontLeft[1]);
   private final Encoder encoderRL = new Encoder(RobotMap.pEncoderRearLeft[0], RobotMap.pEncoderRearLeft[1]);
@@ -34,9 +36,10 @@ public class DriveTrain extends Subsystem {
   private final Wheel wheelFL = new Wheel(motorDriveFL, motorPivotFL, encoderFL, -10.5, 11);
   private final Wheel wheelRL = new Wheel(motorDriveRL, motorPivotRL, encoderRL, -10.5, -11);
   private final Wheel wheelFR = new Wheel(motorDriveFR, motorPivotFR, 10.5, 11);
-  private final Wheel wheelRR = new Wheel(motorDriveRR, motorPivotRR, encoderRR, 10.5, -11);
+  // private final Wheel wheelRR = new Wheel(motorDriveRR, motorPivotRR,
+  // encoderRR, 10.5, -11);
 
-  private final Wheel[] wheels = { wheelFL, wheelRL, wheelFR, wheelRR };
+  private final Wheel[] wheels = { wheelFL, wheelRL, wheelFR, /* wheelRR */ };
   private final SwerveDrive swerveDrive = new SwerveDrive(wheels);
 
   public DriveTrain() {
