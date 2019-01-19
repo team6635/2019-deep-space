@@ -6,16 +6,16 @@ public final class RobotMap {
   public static final int pGyro = 0;
 
   public static final int pMotorDriveFrontLeft = 1;
-  public static final int pMotorPivotFrontLeft = 2;
+  public static final int pTalonPivotFrontLeft = 2;
 
-  public static final int pMotorDriveFrontRight = 3;
-  public static final int pMotorPivotFrontRight = 21;
+  public static final int pMotorDriveFrontRight = 5;
+  public static final int pTalonPivotFrontRight = 21;
 
   public static final int pMotorDriveRearLeft = 5;
-  public static final int pMotorPivotRearLeft = 6;
+  public static final int pTalonPivotRearLeft = 6;
 
   public static final int pMotorDriveRearRight = 7;
-  public static final int pMotorPivotRearRight = 8;
+  public static final int pTalonPivotRearRight = 8;
 
   public static final int[] pEncoderFrontLeft = { 0, 1 };
   public static final int[] pEncoderFrontRight = { 2, 3 };

@@ -4,19 +4,25 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.Autonomous;
 import frc.robot.subsystems.DriveTrain;
 
 public class Robot extends TimedRobot {
-  private Command autonomousCommand;
-
-  public static DriveTrain drivetrain;
+  public static DriveTrain drivetrain = new DriveTrain();
   public static OI oi;
+
+  Command autonomousCommand;
+  SendableChooser<Command> autonChooser = new SendableChooser<>();
 
   @Override
   public void robotInit() {
     drivetrain = new DriveTrain();
     oi = new OI();
+    autonChooser.setDefaultOption("Default Auton", new Autonomous());
+
+    SmartDashboard.putData("Auton Chooser", autonChooser);
 
     SmartDashboard.putData(drivetrain);
   }
@@ -27,14 +33,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
-    drivetrain.disable();
-    MecanumDrive m;
-    m.driveCartesian(ySpeed, xSpeed, zRotation);
   }
 
   @Override
-
   public void disabledPeriodic() {
+    Scheduler.getInstance().run();
   }
 
   @Override
@@ -64,6 +67,6 @@ public class Robot extends TimedRobot {
   }
 
   private void log() {
-    drivetrain.log();
+    // drivetrain.log();
   }
 }
