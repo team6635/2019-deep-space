@@ -1,24 +1,16 @@
 package frc.robot;
 
 public final class RobotMap {
-  // Port numbers
-  public static final int pController = 0;
-  public static final int pGyro = 0;
-
-  public static final int pMotorDriveFrontLeft = 1;
-  public static final int pTalonPivotFrontLeft = 2;
-
-  public static final int pMotorDriveFrontRight = 5;
-  public static final int pTalonPivotFrontRight = 21;
-
-  public static final int pMotorDriveRearLeft = 5;
-  public static final int pTalonPivotRearLeft = 6;
-
-  public static final int pMotorDriveRearRight = 7;
-  public static final int pTalonPivotRearRight = 8;
-
-  public static final int[] pEncoderFrontLeft = { 0, 1 };
-  public static final int[] pEncoderFrontRight = { 2, 3 };
-  public static final int[] pEncoderRearRight = { 5, 4 };
-  public static final int[] pEncoderRearLeft = { 6, 7 };
+  public static final int talonSwervePivotFL = 21;
+  public static final int talonSwervePivotFR = 22;
+  public static final int talonSwervePivotBL = 23;
+  public static final int talonSwervePivotBR = 24;
+  public static final int victorSwerveDriveFL = 25;
+  public static final int victorSwerveDriveFR = 26;
+  public static final int victorSwerveDriveBL = 27;
+  public static final int victorSwerveDriveBR = 28;
+  public static final int encoderSwerveFL = 0; // and 1
+  public static final int encoderSwerveFR = 2; // and 3
+  public static final int encoderSwerveBL = 4; // and 5
+  public static final int encoderSwerveBR = 6; // and 7
 }

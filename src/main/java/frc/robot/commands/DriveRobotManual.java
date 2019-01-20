@@ -7,27 +7,33 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.extensions.Smath;
+import frc.robot.extensions.Smath.Vector2;
 
-public class DriveRobot extends Command {
-  private final XboxController ctlr = Robot.oi.getController();
-
-  public DriveRobot() {
-    requires(Robot.drivetrain);
+public class DriveRobotManual extends Command {
+  public DriveRobotManual() {
+    requires(Robot.driveTrain);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.driveTrain.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drivetrain.drive(ctlr.getX(Hand.kRight), ctlr.getY(Hand.kRight), ctlr.getX(Hand.kLeft));
+    Vector2 leftHandInput = new Vector2(Robot.oi.xbox.getX(Hand.kLeft), Robot.oi.xbox.getY(Hand.kLeft));
+    if (Smath.absAdd(leftHandInput.getX(), leftHandInput.getY()) < 0.25) {
+      Robot.driveTrain.swerveDrive(Robot.oi.xbox.getX(Hand.kRight), Robot.oi.xbox.getY(Hand.kRight));
+    } else {
+      Robot.driveTrain.swerveDrive(Robot.oi.xbox.getX(Hand.kRight), Robot.oi.xbox.getY(Hand.kRight),
+          leftHandInput.getAngle());
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -39,7 +45,6 @@ public class DriveRobot extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.drivetrain.drive(0, 0, 0);
   }
 
   // Called when another command which requires one or more of the same

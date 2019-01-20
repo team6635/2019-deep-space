@@ -3,70 +3,60 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.Autonomous;
 import frc.robot.subsystems.DriveTrain;
 
 public class Robot extends TimedRobot {
-  public static DriveTrain drivetrain = new DriveTrain();
+  Command autonomousCommand;
   public static OI oi;
 
-  Command autonomousCommand;
-  SendableChooser<Command> autonChooser = new SendableChooser<>();
+  // Init subsystems
+  public static DriveTrain driveTrain = new DriveTrain();
+
+  public SendableChooser<Command> autonChooser;
 
   @Override
   public void robotInit() {
-    drivetrain = new DriveTrain();
-    oi = new OI();
-    autonChooser.setDefaultOption("Default Auton", new Autonomous());
+    oi = new OI(); // Don't move this
 
-    SmartDashboard.putData("Auton Chooser", autonChooser);
+    // Send the auton chooser
+    autonChooser = new SendableChooser<>();
 
-    SmartDashboard.putData(drivetrain);
-  }
-
-  @Override
-  public void robotPeriodic() {
-  }
-
-  @Override
-  public void disabledInit() {
-  }
-
-  @Override
-  public void disabledPeriodic() {
-    Scheduler.getInstance().run();
+    SmartDashboard.putData("Auton Mode", autonChooser);
   }
 
   @Override
   public void autonomousInit() {
+    autonomousCommand = autonChooser.getSelected();
     autonomousCommand.start();
   }
 
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
-    log();
   }
 
   @Override
   public void teleopInit() {
-    autonomousCommand.cancel();
+    if (autonomousCommand != null) {
+      autonomousCommand.cancel();
+    }
   }
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    log();
   }
 
   @Override
-  public void testPeriodic() {
+  public void robotPeriodic() {
+    log();
   }
 
+  /**
+   * Log interesting stats to the SmartDashboard
+   */
   private void log() {
-    // drivetrain.log();
   }
 }
