@@ -50,7 +50,7 @@ public final class SwerveDrive extends RobotDriveBase {
     for (int i = 0; i < wheels.length; i++) {
       SwerveWheel wheel = wheels[i];
       wheel.enable();
-      Vector2 r = new Vector2(wheel.getUnitVector());
+      Vector2 r = wheel.getUnitVector();
       r.mul(z);
       r.add(x, y);
       double angle = r.getAngle();

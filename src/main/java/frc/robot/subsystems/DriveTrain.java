@@ -43,7 +43,7 @@ public class DriveTrain extends PIDSubsystem {
   private double z = 0;
 
   public DriveTrain() {
-    super("DriveTrain", 1, 2, 3);
+    super("DriveTrain", 1, 0, 0);
     // Set up field-centric PID
     getPIDController().setInputRange(0, 360);
     getPIDController().setOutputRange(-1, 1);
