@@ -4,87 +4,74 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveRobotManual;
 import frc.robot.extensions.Smath;
 import frc.robot.extensions.SwerveDrive;
-import frc.robot.extensions.SwerveDrive.SwerveWheel;
+import frc.robot.extensions.WPIUtils;
+import frc.robot.extensions.SwerveWheel;
 
 // The PID is used for double-field-centric
 // control of the robot. It will constantly
 // attempt to rotate the robot to the current
 // setpoint.
-public class DriveTrain extends PIDSubsystem {
-  private static final double Kp = 0.015, Ki = 0.001, Kd = 0.003, KwheelDistanceX = 20, KwheelDistanceY = 22;
-
+public class DriveTrain extends Subsystem {
   AnalogGyro gyro = new AnalogGyro(0);
-  SwerveWheel frontLeftWheel = new SwerveWheel(new TalonSRX(RobotMap.victorSwerveDriveFL),
-      new VictorSPX(RobotMap.victorSwerveDriveFL),
-      new Encoder(RobotMap.encoderSwerveFL, RobotMap.encoderSwerveFL + 1, true, EncodingType.k4X), -KwheelDistanceX / 2,
-      KwheelDistanceY / 2, Kp, Ki, Kd);
-  SwerveWheel frontRightWheel = new SwerveWheel(new TalonSRX(RobotMap.victorSwerveDriveFR),
-      new VictorSPX(RobotMap.victorSwerveDriveFR),
-      new Encoder(RobotMap.encoderSwerveFR, RobotMap.encoderSwerveFR + 1, true, EncodingType.k4X), KwheelDistanceX / 2,
-      KwheelDistanceY / 2, Kp, Ki, Kd);
-  SwerveWheel backLeftWheel = new SwerveWheel(new TalonSRX(RobotMap.victorSwerveDriveBL),
-      new VictorSPX(RobotMap.victorSwerveDriveBL),
-      new Encoder(RobotMap.encoderSwerveBL, RobotMap.encoderSwerveBL + 1, true, EncodingType.k4X), -KwheelDistanceX / 2,
-      -KwheelDistanceY / 2, Kp, Ki, Kd);
-  SwerveWheel backRightWheel = new SwerveWheel(new TalonSRX(RobotMap.victorSwerveDriveBR),
-      new VictorSPX(RobotMap.victorSwerveDriveBR),
-      new Encoder(RobotMap.encoderSwerveBR, RobotMap.encoderSwerveBR + 1, true, EncodingType.k4X), KwheelDistanceX / 2,
-      -KwheelDistanceY / 2, Kp, Ki, Kd);
 
-  SwerveDrive swerveDrive = new SwerveDrive(frontLeftWheel, frontRightWheel, backLeftWheel, backRightWheel);
+  SwerveWheel wheelFL = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveFL),
+      new TalonSRX(RobotMap.talonSwervePivotFL), WPIUtils.neverestEncoderDCH(RobotMap.encoderSwerveFL), -10, 11);
+  SwerveWheel wheelFR = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveFR),
+      new TalonSRX(RobotMap.talonSwervePivotFR), WPIUtils.neverestEncoderDCH(RobotMap.encoderSwerveFR), 10, 11);
+  SwerveWheel wheelBL = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveBL),
+      new TalonSRX(RobotMap.talonSwervePivotBL), WPIUtils.neverestEncoderDCH(RobotMap.encoderSwerveBL), -10, -11);
+  SwerveWheel wheelBR = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveBR),
+      new TalonSRX(RobotMap.talonSwervePivotBR), WPIUtils.neverestEncoderDCH(RobotMap.encoderSwerveBR), 10, -11);
 
-  private double z = 0;
+  SwerveDrive drive = new SwerveDrive(wheelFL, wheelFR, wheelBL, wheelBR);
+
+  // private double z = 0;
 
   public DriveTrain() {
-    super("DriveTrain", 1, 0, 0);
+    // super("DriveTrain", 1, 0, 0);
     // Set up field-centric PID
-    getPIDController().setInputRange(0, 360);
-    getPIDController().setOutputRange(-1, 1);
-    getPIDController().setAbsoluteTolerance(2);
-    getPIDController().setContinuous(true);
+    // getPIDController().setInputRange(0, 360);
+    // getPIDController().setOutputRange(-1, 1);
+    // getPIDController().setAbsoluteTolerance(2);
+    // getPIDController().setContinuous(true);
 
     // Add LiveWindow values
-    addChild("Gyro", gyro);
-    addChild(frontLeftWheel);
-    addChild(frontRightWheel);
-    addChild(backLeftWheel);
-    addChild(backRightWheel);
+    // addChild("Gyro", gyro);
+    // addChild(frontLeftWheel);
+    // addChild(frontRightWheel);
+    // addChild(backLeftWheel);
+    // addChild(backRightWheel);
   }
 
   public double getHeading() {
     return Smath.normalizeAngle(gyro.getAngle());
   }
 
-  public void goToHeading(double target) {
-    setSetpoint(Smath.normalizeAngle(target));
+  // public void goToHeading(double target) {
+  // setSetpoint(Smath.normalizeAngle(target));
+  // }
+
+  // public void swerveDrive(double x, double y) {
+  // drive.swerveDrive(x, y, z);
+  // }
+
+  public void swerveDrive(double x, double y, double z) {
+    // goToHeading(targetAngle);
+    drive.swerveDrive(x, y, z);
+    // drive.swerveDrive(x, y, z);
   }
 
-  public void swerveDrive(double x, double y) {
-    swerveDrive.swerveDrive(x, y, z);
-  }
-
-  public void swerveDrive(double x, double y, double targetAngle) {
-    goToHeading(targetAngle);
-    swerveDrive.swerveDrive(x, y, z);
-  }
-
-  @Override
   public void disable() {
-    super.disable();
-    swerveDrive.disable();
+    drive.disable();
   }
 
-  @Override
   public void enable() {
-    super.enable();
-    swerveDrive.enable();
+    drive.enable();
   }
 
   @Override
@@ -92,13 +79,13 @@ public class DriveTrain extends PIDSubsystem {
     setDefaultCommand(new DriveRobotManual());
   }
 
-  @Override
-  protected double returnPIDInput() {
-    return getHeading();
-  }
+  // @Override
+  // protected double returnPIDInput() {
+  // return getHeading();
+  // }
 
-  @Override
-  protected void usePIDOutput(double output) {
-    z = output;
-  }
+  // @Override
+  // protected void usePIDOutput(double output) {
+  // z = output;
+  // }
 }

@@ -10,8 +10,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.extensions.Smath;
-import frc.robot.extensions.Smath.Vector2;
 
 public class DriveRobotManual extends Command {
   public DriveRobotManual() {
@@ -27,13 +25,21 @@ public class DriveRobotManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Vector2 leftHandInput = new Vector2(Robot.oi.xbox.getX(Hand.kLeft), Robot.oi.xbox.getY(Hand.kLeft));
-    if (Smath.absAdd(leftHandInput.getX(), leftHandInput.getY()) < 0.25) {
-      Robot.driveTrain.swerveDrive(Robot.oi.xbox.getX(Hand.kRight), Robot.oi.xbox.getY(Hand.kRight));
-    } else {
-      Robot.driveTrain.swerveDrive(Robot.oi.xbox.getX(Hand.kRight), Robot.oi.xbox.getY(Hand.kRight),
-          leftHandInput.getAngle());
-    }
+    var xIn = Robot.oi.xbox.getX(Hand.kRight);
+    var yIn = -Robot.oi.xbox.getY(Hand.kRight);
+    var zIn = Robot.oi.xbox.getX(Hand.kLeft);
+
+    Robot.driveTrain.swerveDrive(xIn, yIn, zIn);
+    // Vector2 leftHandInput = new Vector2(Robot.oi.xbox.getX(Hand.kLeft),
+    // Robot.oi.xbox.getY(Hand.kLeft));
+    // if (Smath.absAdd(leftHandInput.getX(), leftHandInput.getY()) < 0.25) {
+    // Robot.driveTrain.swerveDrive(Robot.oi.xbox.getX(Hand.kRight),
+    // Robot.oi.xbox.getY(Hand.kRight));
+    // } else {
+    // Robot.driveTrain.swerveDrive(Robot.oi.xbox.getX(Hand.kRight),
+    // Robot.oi.xbox.getY(Hand.kRight),
+    // leftHandInput.getAngle());
+    // }
   }
 
   // Make this return true when this Command no longer needs to run execute()
