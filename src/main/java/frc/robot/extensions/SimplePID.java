@@ -44,7 +44,7 @@ public abstract class SimplePID {
     nonZeroCycleCount++;
 
     var p = Kp * error;
-    var i = Ki * (error - nonZeroCycleCount);
+    var i = Ki * error * nonZeroCycleCount;
     var d = Kd * (lastError - error / rate);
 
     lastError = error;

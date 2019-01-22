@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.autonomous.TestAuton;
 import frc.robot.subsystems.DriveTrain;
 
 public class Robot extends TimedRobot {
@@ -22,6 +23,7 @@ public class Robot extends TimedRobot {
 
     // Send the auton chooser
     autonChooser = new SendableChooser<>();
+    autonChooser.setDefaultOption("TestAuton", new TestAuton());
 
     SmartDashboard.putData("Auton Mode", autonChooser);
   }
