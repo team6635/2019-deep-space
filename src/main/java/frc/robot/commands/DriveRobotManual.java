@@ -1,56 +1,60 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * This command is the default command for the drivetrain when no other command
+ * is scheduled to run. It reads the joystick input, and drives the robot using
+ * that.
+ */
 public class DriveRobotManual extends Command {
+  /**
+   * Constructs a new instance of this command.
+   */
   public DriveRobotManual() {
+    // The only dependency we require here is the drivetrain, which we can access
+    // from Robot.
     requires(Robot.driveTrain);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    // The only initialization we need to perform is to enable the drivetrain.
     Robot.driveTrain.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    // Get the values from the joystick.
     var xIn = Robot.oi.xbox.getX(Hand.kRight);
-    var yIn = -Robot.oi.xbox.getY(Hand.kRight);
-    var zIn = Robot.oi.xbox.getX(Hand.kLeft);
+    var yIn = -Robot.oi.xbox.getY(Hand.kRight); // Notice this is inverted, because the joystick is opposite what is
+                                                // intuitive (forward is -1).
+    var zIn = Robot.oi.xbox.getX(Hand.kLeft); // We are using the X axis of the left hand joystick to provide rotation
+                                              // input, since there is no rotation input on the controller. If using a
+                                              // controller which provides a Z input, that should be used here.
 
+    // Drive the robot using the collected inputs.
     Robot.driveTrain.swerveDrive(xIn, yIn, zIn);
-    // Vector2 leftHandInput = new Vector2(Robot.oi.xbox.getX(Hand.kLeft),
-    // Robot.oi.xbox.getY(Hand.kLeft));
-    // if (Smath.absAdd(leftHandInput.getX(), leftHandInput.getY()) < 0.25) {
-    // Robot.driveTrain.swerveDrive(Robot.oi.xbox.getX(Hand.kRight),
-    // Robot.oi.xbox.getY(Hand.kRight));
-    // } else {
-    // Robot.driveTrain.swerveDrive(Robot.oi.xbox.getX(Hand.kRight),
-    // Robot.oi.xbox.getY(Hand.kRight),
-    // leftHandInput.getAngle());
-    // }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    // This should always return false, since it should never stop running during
+    // the match. When another command is running on the drivetrain, this one sits
+    // in the background, waiting for there to be no command running that is using
+    // the drivetrain.
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    // Simply stop the robot.
     Robot.driveTrain.swerveDrive(0, 0, 0);
   }
 
