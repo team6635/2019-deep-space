@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.TestAuton;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Tester;
 
 /**
  * This is the main class of the robot. The RoboRIO is set up to automatically
@@ -21,6 +22,8 @@ public class Robot extends TimedRobot {
   // Initialize all subsystems.
   /** The {@link DriveTrain} instance of the robot. A subsystem. */
   public static DriveTrain driveTrain = new DriveTrain();
+  /** The {@link Tester} instance of the robot. A subsystem. */
+  public static Tester tester = new Tester();
 
   // Initialize the autonomous chooser.
   /**

@@ -30,4 +30,6 @@ public final class RobotMap {
   public static final int encoderSwerveFR = 2; // and 3
   public static final int encoderSwerveBL = 4; // and 5
   public static final int encoderSwerveBR = 6; // and 7
+
+  public static final int victorTestMotor = 5;
 }
