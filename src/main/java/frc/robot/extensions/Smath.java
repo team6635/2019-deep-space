@@ -1,15 +1,41 @@
 package frc.robot.extensions;
 
+/**
+ * Helpful math functions primarily used for swerve drive.
+ */
 public final class Smath {
+  /**
+   * Takes a cartesian point and returns the angle from (0, 0) to that point.
+   * 
+   * <p>
+   * For example, the angle between (0, 0) and (1, 1) is 45 degrees.
+   * 
+   * @param x
+   * @param y
+   * @return the angle between (0, 0) and (x, y).
+   */
   public static final double calculateAngleFromPoint(double x, double y) {
     return normalizeAngle(Math.atan2(x, y) * (180 / Math.PI));
   }
 
+  /**
+   * Normalizes an angle, effectively bringing it into the domain of many other
+   * functions.
+   * 
+   * @param raw a raw value to resolve to a normal angle.
+   * @return a normalized angle in the range [0, 360).
+   */
   public static final double normalizeAngle(double raw) {
     raw %= 360;
     return raw < 0 ? 360 + raw : raw;
   }
 
+  /**
+   * Calculates the sum of the absolute values of the inputs.
+   * 
+   * @param vals the values to sum absolutely.
+   * @return the absolute sum of the values.
+   */
   public static final double absAdd(double... vals) {
     double sum = 0;
     for (double d : vals) {
@@ -18,6 +44,14 @@ public final class Smath {
     return sum;
   }
 
+  /**
+   * Normalizes a set of values so that they are all relative to the highest value
+   * if they are higher than the specified limit.
+   * 
+   * @param speeds the array of values to process.
+   * @param limit  the limit where a value becomes outside of the range
+   *               (absolute).
+   */
   public static final void normalizeSpeeds(double[] speeds, double limit) {
     double max = 0;
     for (double speed : speeds) {
@@ -32,6 +66,10 @@ public final class Smath {
     }
   }
 
+  /**
+   * Represents a 2-dimensional Vector. Can also be used as a 2-dimensional
+   * cartesian point.
+   */
   public static final class Vector2 {
     private double x, y;
 
