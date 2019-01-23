@@ -12,10 +12,6 @@ import frc.robot.extensions.SwerveDrive;
 import frc.robot.extensions.WPIUtils;
 import frc.robot.extensions.SwerveWheel;
 
-// The PID is used for double-field-centric
-// control of the robot. It will constantly
-// attempt to rotate the robot to the current
-// setpoint.
 public class DriveTrain extends Subsystem {
   AnalogGyro gyro = new AnalogGyro(0);
 
@@ -30,28 +26,16 @@ public class DriveTrain extends Subsystem {
 
   SwerveDrive drive = new SwerveDrive(wheelFL, wheelFR, wheelBL, wheelBR);
 
-  // private double z = 0;
+  // TODO: Store a z value used for rotation, update it from a PID loop.
 
   public DriveTrain() {
-    // super("DriveTrain", 1, 0, 0);
-    // Set up field-centric PID
-    // getPIDController().setInputRange(0, 360);
-    // getPIDController().setOutputRange(-1, 1);
-    // getPIDController().setAbsoluteTolerance(2);
-    // getPIDController().setContinuous(true);
-
-    // Add LiveWindow values
-    // addChild("Gyro", gyro);
-    // addChild(frontLeftWheel);
-    // addChild(frontRightWheel);
-    // addChild(backLeftWheel);
-    // addChild(backRightWheel);
   }
 
   public double getHeading() {
     return Smath.normalizeAngle(gyro.getAngle());
   }
 
+  // TODO
   // public void goToHeading(double target) {
   // setSetpoint(Smath.normalizeAngle(target));
   // }
