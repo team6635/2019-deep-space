@@ -9,7 +9,7 @@ import frc.robot.extensions.Smath.Vector2;
 
 /**
  * This class represents a "swerve module." That is, a combination of both a
- * pivot motor and a driving motor.
+ * pivot motor and a driving motor, as well as an encoder for the pivot motor.
  */
 public class SwerveWheel {
   /** The motor controller for moving the driving motor. */
