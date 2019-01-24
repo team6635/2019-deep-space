@@ -60,6 +60,7 @@ public final class SwerveDrive {
 
     // If the absolute sum of the inputs is below a certain tolerance, then stop all
     // movement.
+    // TODO: Move this to DriveRobotManual?
     if (Smath.absAdd(x, y, z) <= 0.08) {
       for (var wheel : wheels) {
         wheel.updateDriveMotorSpeed(0);
@@ -76,6 +77,18 @@ public final class SwerveDrive {
       r.add(x, y);
       var angle = r.getAngle();
       var speed = r.getMagnitude();
+
+      // Reverse function in case it's shorter to go the other way around and reverse
+      // the driving motor.
+      var invertedAngle = Smath.normalizeAngle(angle + 180);
+      var currentAngle = wheel.getCurrentEncoderValue();
+      var regularError = Smath.calculateError(currentAngle, angle, 360);
+      var invertedError = Smath.calculateError(currentAngle, invertedAngle, 360);
+      if (Math.abs(invertedError) < Math.abs(regularError)) {
+        speed = -speed;
+        angle = invertedAngle;
+      }
+
       wheel.updatePIDSetpoint(angle);
       speeds[i] = speed;
     }

@@ -31,6 +31,25 @@ public final class Smath {
   }
 
   /**
+   * Calculates the shortest error between two distances with a modulus.
+   * 
+   * @param posCurrent Current or starting position.
+   * @param posTarget  Target position.
+   * @param modulus    Modulus of the range.
+   * @return The optimal error.
+   */
+  public static final double calculateError(double posCurrent, double posTarget, double modulus) {
+    var error = posTarget - posCurrent;
+    if (error > modulus / 2) {
+      error -= modulus;
+    } else if (error < -modulus / 2) {
+      error += modulus;
+    }
+
+    return error % modulus;
+  }
+
+  /**
    * Calculates the sum of the absolute values of the inputs.
    * 
    * @param vals the values to sum absolutely.
