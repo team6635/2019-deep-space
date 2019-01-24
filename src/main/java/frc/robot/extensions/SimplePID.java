@@ -31,8 +31,6 @@ public abstract class SimplePID {
   double lastError = 0;
   /** If false, the loop will not provide output. */
   boolean isEnabled = false;
-  /** Unused. TODO: Support non-continuous implementations. */
-  boolean isContinuous = true;
   /** How often, in milliseconds, to call the loop using a Timer. */
   public final static long rate = 5;
   /**
