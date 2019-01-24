@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.extensions.Smath;
 
 /**
  * This command is the default command for the drivetrain when no other command
@@ -36,6 +37,13 @@ public class DriveRobotManual extends Command {
     var zIn = Robot.oi.xbox.getX(Hand.kLeft); // We are using the X axis of the left hand joystick to provide rotation
                                               // input, since there is no rotation input on the controller. If using a
                                               // controller which provides a Z input, that should be used here.
+
+    // If the absolute sum of the inputs is below a specific boundary, then brake
+    // the swerve drive.
+    if (Smath.absAdd(xIn, yIn, zIn) < 0.08) {
+      Robot.driveTrain.brake();
+      return;
+    }
 
     // Drive the robot using the collected inputs.
     Robot.driveTrain.swerveDrive(xIn, yIn, zIn);

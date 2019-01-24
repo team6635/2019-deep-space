@@ -50,6 +50,15 @@ public class DriveTrain extends Subsystem {
     // drive.swerveDrive(x, y, z);
   }
 
+  /**
+   * Brakes all wheels.
+   */
+  public void brake() {
+    for (var wheel : drive.getWheels()) {
+      wheel.brake();
+    }
+  }
+
   public void disable() {
     drive.disable();
   }

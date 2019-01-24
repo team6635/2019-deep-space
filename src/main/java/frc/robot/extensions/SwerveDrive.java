@@ -124,7 +124,7 @@ public final class SwerveDrive {
   /**
    * Gets the wheels as an array.
    */
-  private SwerveWheel[] getWheels() {
+  public SwerveWheel[] getWheels() {
     SwerveWheel[] wheels = { frontLeftWheel, frontRightWheel, backLeftWheel, backRightWheel };
     return wheels;
   }

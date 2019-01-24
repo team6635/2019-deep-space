@@ -129,6 +129,14 @@ public class SwerveWheel {
   }
 
   /**
+   * Brakes the PID and drive motor.
+   */
+  public void brake() {
+    updatePIDSetpoint(getCurrentEncoderValue());
+    updateDriveMotorSpeed(0);
+  }
+
+  /**
    * Gets the unit tangent vector.
    * 
    * @return a copy of the unit tangent vector.
