@@ -23,14 +23,14 @@ public final class WPIUtils {
    * Creates a new quadrature (4x) <em>angle</em> encoder using the specified
    * channel, and the one above it.
    * 
-   * @param chan1              the first channel to use, uses {@code chan1 + 1} as
-   *                           the second.
-   * @param ticksPerRevolution the ticks emitted by the encoder every full
-   *                           revolution.
+   * @param chan1               the first channel to use, uses {@code chan1 + 1}
+   *                            as the second.
+   * @param pulsesPerRevolution the pulses emitted by the encoder every full
+   *                            revolution.
    * @return an {@link AngleEncoder} instance.
    */
-  public static final AngleEncoder angleEncoderDCH(int chan1, double ticksPerRevolution) {
-    var ae = new AngleEncoder(chan1, chan1 + 1, true, EncodingType.k4X, ticksPerRevolution);
+  public static final AngleEncoder angleEncoderDCH(int chan1, double pulsesPerRevolution) {
+    var ae = new AngleEncoder(chan1, chan1 + 1, true, EncodingType.k4X, pulsesPerRevolution);
     return ae;
   }
 

@@ -58,17 +58,6 @@ public final class SwerveDrive {
     var wheels = getWheels();
     var speeds = new double[wheels.length];
 
-    // If the absolute sum of the inputs is below a certain tolerance, then stop all
-    // movement.
-    // TODO: Move this to DriveRobotManual?
-    if (Smath.absAdd(x, y, z) <= 0.08) {
-      for (var wheel : wheels) {
-        wheel.updateDriveMotorSpeed(0);
-        wheel.updatePIDSetpoint(wheel.getCurrentEncoderValue());
-      }
-      return;
-    }
-
     // Cauculate proper angle and speed for each wheel.
     for (int i = 0; i < wheels.length; i++) {
       var wheel = wheels[i];

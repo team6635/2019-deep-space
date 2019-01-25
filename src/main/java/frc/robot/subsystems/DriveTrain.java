@@ -16,13 +16,13 @@ public class DriveTrain extends Subsystem {
   AnalogGyro gyro = new AnalogGyro(0);
 
   SwerveWheel wheelFL = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveFL),
-      new TalonSRX(RobotMap.talonSwervePivotFL), WPIUtils.encoderDCH(RobotMap.encoderSwerveFL), -10, 11);
+      new TalonSRX(RobotMap.talonSwervePivotFL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFL, 420), -10, 11);
   SwerveWheel wheelFR = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveFR),
-      new TalonSRX(RobotMap.talonSwervePivotFR), WPIUtils.encoderDCH(RobotMap.encoderSwerveFR), 10, 11);
+      new TalonSRX(RobotMap.talonSwervePivotFR), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFR, 420), 10, 11);
   SwerveWheel wheelBL = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveBL),
-      new TalonSRX(RobotMap.talonSwervePivotBL), WPIUtils.encoderDCH(RobotMap.encoderSwerveBL), -10, -11);
+      new TalonSRX(RobotMap.talonSwervePivotBL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBL, 420), -10, -11);
   SwerveWheel wheelBR = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveBR),
-      new TalonSRX(RobotMap.talonSwervePivotBR), WPIUtils.encoderDCH(RobotMap.encoderSwerveBR), 10, -11);
+      new TalonSRX(RobotMap.talonSwervePivotBR), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBR, 420), 10, -11);
 
   SwerveDrive drive = new SwerveDrive(wheelFL, wheelFR, wheelBL, wheelBR);
 

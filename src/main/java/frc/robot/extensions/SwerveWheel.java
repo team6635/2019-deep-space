@@ -3,9 +3,9 @@ package frc.robot.extensions;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.extensions.Smath.Vector2;
+import frc.robot.extensions.WPIUtils.AngleEncoder;
 
 /**
  * This class represents a "swerve module." That is, a combination of both a
@@ -17,7 +17,7 @@ public class SwerveWheel {
   /** The motor controller for moving the pivot motor. */
   final BaseMotorController pivot;
   /** The encoder that provides feedback for the pivot motor. */
-  final Encoder pEncoder;
+  final AngleEncoder pEncoder;
   /** The unit tangent vector, used in calculations. */
   final Vector2 uTan;
   /** The PID loop for the pivot motor. */
@@ -36,8 +36,8 @@ public class SwerveWheel {
    * @param relY         the position on the Y-axis of the wheel itself, relative
    *                     to the center of rotation of the robot.
    */
-  public SwerveWheel(BaseMotorController driveMotor, BaseMotorController pivotMotor, Encoder pivotEncoder, double relX,
-      double relY) {
+  public SwerveWheel(BaseMotorController driveMotor, BaseMotorController pivotMotor, AngleEncoder pivotEncoder,
+      double relX, double relY) {
     // Assign controllers and encoder.
     drive = driveMotor;
     pivot = pivotMotor;
@@ -119,13 +119,8 @@ public class SwerveWheel {
    */
   public double getCurrentEncoderValue() {
     // TODO: For debugging only:
-    SmartDashboard.putNumber("inValue @ " + uTan.getAngle(), Smath.normalizeAngle(pEncoder.getDistance() / 410 * 360));
-
-    // TODO: Move "/410 * 360" to a better way of doing this. This is used for the
-    // ticks per revolution on the encoder. Neverest encoders are 410 per
-    // revolution. All the math requires this method to return a value between 0 and
-    // 360.
-    return Smath.normalizeAngle(pEncoder.getDistance() / 410 * 360);
+    SmartDashboard.putNumber("inValue @ " + uTan.getAngle(), pEncoder.getAngle());
+    return pEncoder.getAngle();
   }
 
   /**
