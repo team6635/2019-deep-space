@@ -15,6 +15,7 @@ import frc.robot.extensions.SwerveWheel;
 public class DriveTrain extends Subsystem {
   AnalogGyro gyro = new AnalogGyro(0);
 
+  // Neverest 60 motors emit 420 pulses per revolution.
   SwerveWheel wheelFL = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveFL),
       new TalonSRX(RobotMap.talonSwervePivotFL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFL, 420), -10, 11);
   SwerveWheel wheelFR = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveFR),
