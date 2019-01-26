@@ -44,11 +44,11 @@ public class SwerveWheel {
     pEncoder = pivotEncoder;
 
     // Calculate unit tangent vector.
-    uTan = new Vector2(-relY, relX);
+    uTan = new Vector2(relY, relX);
     uTan.div(uTan.getMagnitude());
 
     // Setup PID
-    pid = new SimplePID(0.015, 0.001, 0.001) {
+    pid = new SimplePID(0.015, 0.001, 0.01) {
       @Override
       public void usePIDOutput(double output) {
         updatePivotMotorSpeed(output);

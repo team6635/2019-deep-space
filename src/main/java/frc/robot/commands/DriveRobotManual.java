@@ -31,9 +31,9 @@ public class DriveRobotManual extends Command {
   @Override
   protected void execute() {
     // Get the values from the joystick.
-    var xIn = Robot.oi.xbox.getX(Hand.kRight);
-    var yIn = -Robot.oi.xbox.getY(Hand.kRight); // Notice this is inverted, because the joystick is opposite what is
-                                                // intuitive (forward is -1).
+    var xIn = -Robot.oi.xbox.getX(Hand.kRight);
+    var yIn = Robot.oi.xbox.getY(Hand.kRight); // Notice this is inverted, because the joystick is opposite what is
+                                               // intuitive (forward is -1).
     var zIn = Robot.oi.xbox.getX(Hand.kLeft); // We are using the X axis of the left hand joystick to provide rotation
                                               // input, since there is no rotation input on the controller. If using a
                                               // controller which provides a Z input, that should be used here.
@@ -46,7 +46,7 @@ public class DriveRobotManual extends Command {
     }
 
     // Drive the robot using the collected inputs.
-    Robot.driveTrain.swerveDrive(xIn, yIn, zIn);
+    Robot.driveTrain.swerveDrive(xIn, yIn, zIn / 4);
   }
 
   // Make this return true when this Command no longer needs to run execute()
