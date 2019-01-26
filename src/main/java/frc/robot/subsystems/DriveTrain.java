@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,14 +16,14 @@ public class DriveTrain extends Subsystem {
   AnalogGyro gyro = new AnalogGyro(0);
 
   // Neverest 60 motors emit 420 pulses per revolution.
-  SwerveWheel wheelFL = new SwerveWheel(new VictorSPX(RobotMap.pSwerveDriveFL), new TalonSRX(RobotMap.pSwervePivotFL),
-      WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFL, 420), -10, 11);
-  SwerveWheel wheelFR = new SwerveWheel(new VictorSPX(RobotMap.pSwerveDriveFR), new TalonSRX(RobotMap.pSwervePivotFR),
-      WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFR, 420), 10, 11);
-  SwerveWheel wheelBL = new SwerveWheel(new VictorSPX(RobotMap.pSwerveDriveBL), new TalonSRX(RobotMap.pSwervePivotBL),
-      WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBL, 420), -10, -11);
-  SwerveWheel wheelBR = new SwerveWheel(new VictorSPX(RobotMap.pSwerveDriveBR), new TalonSRX(RobotMap.pSwervePivotBR),
-      WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBR, 420), 10, -11);
+  SwerveWheel wheelFL = new SwerveWheel(new WPI_VictorSPX(RobotMap.pSwerveDriveFL),
+      new WPI_TalonSRX(RobotMap.pSwervePivotFL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFL, 420), -10, 11);
+  SwerveWheel wheelFR = new SwerveWheel(new WPI_VictorSPX(RobotMap.pSwerveDriveFR),
+      new WPI_TalonSRX(RobotMap.pSwervePivotFR), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFR, 420), 10, 11);
+  SwerveWheel wheelBL = new SwerveWheel(new WPI_VictorSPX(RobotMap.pSwerveDriveBL),
+      new WPI_TalonSRX(RobotMap.pSwervePivotBL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBL, 420), -10, -11);
+  SwerveWheel wheelBR = new SwerveWheel(new WPI_VictorSPX(RobotMap.pSwerveDriveBR),
+      new WPI_TalonSRX(RobotMap.pSwervePivotBR), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBR, 420), 10, -11);
 
   SwerveDrive drive = new SwerveDrive(wheelFL, wheelFR, wheelBL, wheelBR);
 

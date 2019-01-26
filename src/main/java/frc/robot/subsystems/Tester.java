@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -12,7 +12,7 @@ import frc.robot.RobotMap;
  * A and B buttons on the controller to control the motor.
  */
 public class Tester extends Subsystem {
-  BaseMotorController motor = new VictorSPX(RobotMap.pTestMotor);
+  BaseMotorController motor = new WPI_VictorSPX(RobotMap.pTestMotor);
 
   @Override
   public void initDefaultCommand() {
