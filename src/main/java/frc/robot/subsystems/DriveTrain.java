@@ -16,14 +16,14 @@ public class DriveTrain extends Subsystem {
   AnalogGyro gyro = new AnalogGyro(0);
 
   // Neverest 60 motors emit 420 pulses per revolution.
-  SwerveWheel wheelFL = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveFL),
-      new TalonSRX(RobotMap.talonSwervePivotFL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFL, 420), -10, 11);
-  SwerveWheel wheelFR = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveFR),
-      new TalonSRX(RobotMap.talonSwervePivotFR), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFR, 420), 10, 11);
-  SwerveWheel wheelBL = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveBL),
-      new TalonSRX(RobotMap.talonSwervePivotBL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBL, 420), -10, -11);
-  SwerveWheel wheelBR = new SwerveWheel(new VictorSPX(RobotMap.victorSwerveDriveBR),
-      new TalonSRX(RobotMap.talonSwervePivotBR), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBR, 420), 10, -11);
+  SwerveWheel wheelFL = new SwerveWheel(new VictorSPX(RobotMap.pSwerveDriveFL), new TalonSRX(RobotMap.pSwervePivotFL),
+      WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFL, 420), -10, 11);
+  SwerveWheel wheelFR = new SwerveWheel(new VictorSPX(RobotMap.pSwerveDriveFR), new TalonSRX(RobotMap.pSwervePivotFR),
+      WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFR, 420), 10, 11);
+  SwerveWheel wheelBL = new SwerveWheel(new VictorSPX(RobotMap.pSwerveDriveBL), new TalonSRX(RobotMap.pSwervePivotBL),
+      WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBL, 420), -10, -11);
+  SwerveWheel wheelBR = new SwerveWheel(new VictorSPX(RobotMap.pSwerveDriveBR), new TalonSRX(RobotMap.pSwervePivotBR),
+      WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBR, 420), 10, -11);
 
   SwerveDrive drive = new SwerveDrive(wheelFL, wheelFR, wheelBL, wheelBR);
 

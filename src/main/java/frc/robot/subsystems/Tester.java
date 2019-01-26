@@ -12,7 +12,7 @@ import frc.robot.RobotMap;
  * A and B buttons on the controller to control the motor.
  */
 public class Tester extends Subsystem {
-  BaseMotorController motor = new VictorSPX(RobotMap.victorTestMotor);
+  BaseMotorController motor = new VictorSPX(RobotMap.pTestMotor);
 
   @Override
   public void initDefaultCommand() {
