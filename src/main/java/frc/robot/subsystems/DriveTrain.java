@@ -2,9 +2,11 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveRobotManual;
 import frc.robot.extensions.Smath;
@@ -13,8 +15,8 @@ import frc.robot.extensions.WPIUtils;
 import frc.robot.extensions.SwerveWheel;
 
 public class DriveTrain extends Subsystem {
-  AnalogGyro gyro = new AnalogGyro(0);
-
+  // AnalogGyro gyro = new AnalogGyro(0);
+  AHRS gyro = new AHRS(SPI.Port.kMXP);
   // Neverest 60 motors emit 420 pulses per revolution.
   SwerveWheel wheelFL = new SwerveWheel(new WPI_VictorSPX(RobotMap.pSwerveDriveFL),
       new WPI_VictorSPX(RobotMap.pSwervePivotFL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFL, 410), -11, 11.5);
@@ -71,6 +73,10 @@ public class DriveTrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new DriveRobotManual());
+  }
+
+  public void log() {
+    SmartDashboard.putNumber("Heading", getHeading());
   }
 
   // @Override

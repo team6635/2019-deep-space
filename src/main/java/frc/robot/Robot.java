@@ -110,5 +110,6 @@ public class Robot extends TimedRobot {
   private void log() {
     // Coming Soon: Some fun telemetry!
     // TODO
+    driveTrain.log();
   }
 }
