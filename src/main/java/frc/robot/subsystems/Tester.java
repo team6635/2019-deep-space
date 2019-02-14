@@ -1,9 +1,8 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -12,7 +11,7 @@ import frc.robot.RobotMap;
  * A and B buttons on the controller to control the motor.
  */
 public class Tester extends Subsystem {
-  BaseMotorController motor = new WPI_VictorSPX(RobotMap.pTestMotor);
+  SpeedController motor = new WPI_VictorSPX(RobotMap.pTestMotor);
 
   @Override
   public void initDefaultCommand() {
@@ -25,13 +24,13 @@ public class Tester extends Subsystem {
    * @param speed the speed to turn the motor at.
    */
   public void moveMotor(double speed) {
-    motor.set(ControlMode.PercentOutput, speed);
+    motor.set(speed);
   }
 
   /**
    * Stops the motor.
    */
   public void stop() {
-    motor.set(ControlMode.PercentOutput, 0);
+    motor.set(0);
   }
 }

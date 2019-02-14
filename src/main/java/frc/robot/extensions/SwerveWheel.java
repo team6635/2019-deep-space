@@ -48,7 +48,7 @@ public class SwerveWheel {
     uTan.div(uTan.getMagnitude());
 
     // Setup PID
-    pid = new SimplePID(0.015, 0.001, 0.05) {
+    pid = new SimplePID(0.015, 0.0, 0.0) {
       @Override
       public void usePIDOutput(double output) {
         updatePivotMotorSpeed(output);
@@ -63,7 +63,7 @@ public class SwerveWheel {
   }
 
   /**
-   * Sends the specified speed to the driving motor controller as a percent
+   * Sends the specified spe ed to the driving motor controller as a percent
    * output.
    * 
    * @param speed the speed to drive at, between -1 and 1, inclusively.

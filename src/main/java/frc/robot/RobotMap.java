@@ -18,21 +18,21 @@ package frc.robot;
  * changing the number in many many places in the code.
  */
 public final class RobotMap {
-  public static final int pSwervePivotBL = 3;
-  public static final int pSwerveDriveBL = 4;
-  public static final int encoderSwerveBL = 4; // and 5
+  public static final int pSwervePivotBL = 21;
+  public static final int pSwerveDriveBL = 6;
+  public static final int encoderSwerveBL = 6; // and 7
 
-  public static final int pSwerveDriveFR = 21;
+  public static final int pSwerveDriveFR = 4;
   public static final int pSwervePivotFR = 22;
   public static final int encoderSwerveFR = 2; // and 3
 
-  public static final int pSwervePivotFL = 1;
-  public static final int pSwerveDriveFL = 2;
+  public static final int pSwerveDriveFL = 3;
+  public static final int pSwervePivotFL = 24;
   public static final int encoderSwerveFL = 0; // and 1
 
   public static final int pSwervePivotBR = 23;
-  public static final int pSwerveDriveBR = 24;
-  public static final int encoderSwerveBR = 6; // and 7
+  public static final int pSwerveDriveBR = 2;
+  public static final int encoderSwerveBR = 4; // and 5
 
-  public static final int pTestMotor = 5;
+  public static final int pTestMotor = 6;
 }
