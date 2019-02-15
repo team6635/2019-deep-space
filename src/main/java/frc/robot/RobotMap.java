@@ -18,21 +18,28 @@ package frc.robot;
  * changing the number in many many places in the code.
  */
 public final class RobotMap {
-  public static final int pSwervePivotBL = 21;
-  public static final int pSwerveDriveBL = 6;
-  public static final int encoderSwerveBL = 6; // and 7
+  public static final int victorElevator = 1;
+  public static final int victorSwerveDriveBR = 2;
+  public static final int victorSwerveDriveFL = 3;
+  public static final int victorSwerveDriveFR = 4;
+  public static final int victorClimberLiftBack = 5;
+  public static final int victorSwerveDriveBL = 6;
+  public static final int victorIntakeBottom = 7;
+  public static final int victorClimberLeftFront = 8;
+  public static final int victorClimberDriver = 9;
+  public static final int victorIntakeTop = 10;
 
-  public static final int pSwerveDriveFR = 4;
-  public static final int pSwervePivotFR = 22;
-  public static final int encoderSwerveFR = 2; // and 3
+  public static final int talonSwervePivotBL = 21;
+  public static final int talonSwervePivotFR = 22;
+  public static final int talonSwervePivotBR = 23;
+  public static final int talonSwervePivotFL = 24;
 
-  public static final int pSwerveDriveFL = 3;
-  public static final int pSwervePivotFL = 24;
   public static final int encoderSwerveFL = 0; // and 1
-
-  public static final int pSwervePivotBR = 23;
-  public static final int pSwerveDriveBR = 2;
+  public static final int encoderSwerveFR = 2; // and 3
   public static final int encoderSwerveBR = 4; // and 5
-
-  public static final int pTestMotor = 6;
+  public static final int encoderSwerveBL = 6; // and 7
+  public static final int encoderElevator = 8; // and 9
+  // The NAXV provides additional DIO ports starting at 10.
+  public static final int encoderClimberFront = 10; // and 11
+  public static final int encoderClimberBack = 12; // and 13
 }
