@@ -25,7 +25,7 @@ public final class RobotMap {
   public static final int victorClimberLiftBack = 5;
   public static final int victorSwerveDriveBL = 6;
   public static final int victorIntakeBottom = 7;
-  public static final int victorClimberLeftFront = 8;
+  public static final int victorClimberLiftFront = 8;
   public static final int victorClimberDriver = 9;
   public static final int victorIntakeTop = 10;
 
