@@ -17,13 +17,17 @@ public class DriveTrain extends Subsystem {
 
   // Neverest 60 motors emit 420 pulses per revolution.
   SwerveWheel wheelFL = new SwerveWheel(new WPI_VictorSPX(RobotMap.pSwerveDriveFL),
-      new WPI_TalonSRX(RobotMap.pSwervePivotFL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFL, 420.0), -11, 11.5);
+      new WPI_TalonSRX(RobotMap.pSwervePivotFL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFL, 420.0), -10.25,
+      10.25);
   SwerveWheel wheelFR = new SwerveWheel(new WPI_VictorSPX(RobotMap.pSwerveDriveFR),
-      new WPI_TalonSRX(RobotMap.pSwervePivotFR), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFR, 420.0), 11, 11.5);
+      new WPI_TalonSRX(RobotMap.pSwervePivotFR), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFR, 420.0), 10.25,
+      10.25);
   SwerveWheel wheelBL = new SwerveWheel(new WPI_VictorSPX(RobotMap.pSwerveDriveBL),
-      new WPI_TalonSRX(RobotMap.pSwervePivotBL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBL, 420.0), -11, -11.5);
+      new WPI_TalonSRX(RobotMap.pSwervePivotBL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBL, 420.0), -10.25,
+      -10.25);
   SwerveWheel wheelBR = new SwerveWheel(new WPI_VictorSPX(RobotMap.pSwerveDriveBR),
-      new WPI_TalonSRX(RobotMap.pSwervePivotBR), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBR, 420.0), 11, -11.5);
+      new WPI_TalonSRX(RobotMap.pSwervePivotBR), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveBR, 420.0), 10.25,
+      -10.25);
 
   SwerveDrive drive = new SwerveDrive(wheelFL, wheelFR, wheelBL, wheelBR);
 
