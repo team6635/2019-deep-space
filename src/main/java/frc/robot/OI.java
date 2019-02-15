@@ -2,7 +2,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.TestMotor;
 
 /**
  * This class provides access to input devices (like joysticks) attached to the
@@ -20,7 +19,5 @@ public final class OI {
   final JoystickButton buttonB = new JoystickButton(xbox, 2);
 
   public OI() {
-    buttonA.whileHeld(new TestMotor(1));
-    buttonB.whileHeld(new TestMotor(-1));
   }
 }
