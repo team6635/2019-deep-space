@@ -13,8 +13,8 @@ import frc.robot.extensions.WPIUtils;
 import frc.robot.extensions.SwerveWheel;
 
 public class DriveTrain extends Subsystem {
-  // AnalogGyro gyro = new AnalogGyro(0);
   AHRS gyro = new AHRS(SPI.Port.kMXP);
+
   // Neverest 60 motors emit 420 pulses per revolution.
   SwerveWheel wheelFL = new SwerveWheel(new WPI_VictorSPX(RobotMap.pSwerveDriveFL),
       new WPI_TalonSRX(RobotMap.pSwervePivotFL), WPIUtils.angleEncoderDCH(RobotMap.encoderSwerveFL, 420.0), -11, 11.5);
@@ -29,19 +29,6 @@ public class DriveTrain extends Subsystem {
 
   public DriveTrain() {
   }
-
-  // public double getHeading() {
-  // return Smath.normalizeAngle(gyro.getAngle());
-  // }
-
-  // TODO
-  // public void goToHeading(double target) {
-  // setSetpoint(Smath.normalizeAngle(target));
-  // }
-
-  // public void swerveDrive(double x, double y) {
-  // drive.swerveDrive(x, y, z);
-  // }
 
   public void swerveDrive(double x, double y, double z) {
     // goToHeading(targetAngle);
