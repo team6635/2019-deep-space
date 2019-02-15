@@ -9,11 +9,9 @@ import frc.robot.subsystems.DriveTrain;
  * run this code first when starting the robot.
  */
 public class Robot extends TimedRobot {
-  /** The human interface devices. An instance of {@link OI}. */
   public static OI oi;
 
   // Initialize all subsystems.
-  /** The {@link DriveTrain} instance of the robot. A subsystem. */
   public static DriveTrain driveTrain = new DriveTrain();
 
   /**
