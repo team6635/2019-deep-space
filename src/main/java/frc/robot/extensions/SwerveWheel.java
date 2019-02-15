@@ -48,7 +48,7 @@ public class SwerveWheel {
     uTan.div(uTan.getMagnitude());
 
     // Setup PID
-    pid = new SimplePID(0.015, 0.0, 0.0) {
+    pid = new SimplePID(0.02, 0, 0) {
       @Override
       public void usePIDOutput(double output) {
         updatePivotMotorSpeed(output);
@@ -59,7 +59,7 @@ public class SwerveWheel {
         return getCurrentEncoderValue();
       }
     };
-    pid.setTolerance(0);
+    pid.setTolerance(1);
   }
 
   /**
