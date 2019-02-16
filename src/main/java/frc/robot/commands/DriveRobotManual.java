@@ -46,7 +46,8 @@ public class DriveRobotManual extends Command {
     }
 
     // Drive the robot using the collected inputs.
-    Robot.driveTrain.swerveDrive(xIn / 2, yIn / 2, zIn / 2);
+    // Robot.driveTrain.swerveDrive(xIn / 2, yIn / 2, zIn / 2);
+    Robot.driveTrain.swerveDrive(xIn * 2 / 3, yIn * 2 / 3, zIn * 2 / 3);
   }
 
   // Make this return true when this Command no longer needs to run execute()

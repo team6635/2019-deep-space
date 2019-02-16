@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.DriveTrain;
@@ -24,6 +25,9 @@ public class Robot extends TimedRobot {
     // get null pointers for any required subsystems if the OI is called during the
     // Robot class' construction.
     oi = new OI();
+
+    // Start camera stream
+    CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**
