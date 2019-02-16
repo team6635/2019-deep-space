@@ -2,6 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+// import frc.robot.commands.MoveClimberBack;
+import frc.robot.commands.MoveClimberFront;
 
 /**
  * This class provides access to input devices (like joysticks) attached to the
@@ -17,7 +19,13 @@ public final class OI {
   // the buttons are pressed, the command will run.
   final JoystickButton buttonA = new JoystickButton(xbox, 1);
   final JoystickButton buttonB = new JoystickButton(xbox, 2);
+  final JoystickButton buttonX = new JoystickButton(xbox, 3);
+  final JoystickButton buttonY = new JoystickButton(xbox, 4);
 
   public OI() {
+    // buttonA.whenPressed(new MoveClimberBack(0));
+    // buttonB.toggleWhenPressed(new MoveClimberBack(100));
+    buttonX.toggleWhenPressed(new MoveClimberFront(0));
+    buttonY.toggleWhenPressed(new MoveClimberFront(100));
   }
 }

@@ -3,6 +3,8 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.subsystems.ClimberBack;
+import frc.robot.subsystems.ClimberFront;
 import frc.robot.subsystems.DriveTrain;
 
 /**
@@ -13,6 +15,8 @@ public class Robot extends TimedRobot {
   public static OI oi;
 
   // Initialize all subsystems.
+  public static ClimberBack climberBack = new ClimberBack();
+  public static ClimberFront climberFront = new ClimberFront();
   public static DriveTrain driveTrain = new DriveTrain();
 
   /**
