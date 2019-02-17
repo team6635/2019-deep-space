@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import frc.robot.Robot;
 
 public class MoveClimberFront extends Command {
@@ -25,7 +26,7 @@ public class MoveClimberFront extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return Robot.climberFront.onTarget();
   }
 
   // Called once after isFinished returns true

@@ -23,9 +23,10 @@ public final class OI {
   final JoystickButton buttonY = new JoystickButton(xbox, 4);
 
   public OI() {
-    // buttonA.whenPressed(new MoveClimberBack(0));
-    // buttonB.toggleWhenPressed(new MoveClimberBack(100));
-    buttonX.toggleWhenPressed(new MoveClimberFront(0));
-    buttonY.toggleWhenPressed(new MoveClimberFront(100));
+    // buttonX.toggleWhenPressed(new MoveClimberFront(0));
+    // buttonY.toggleWhenPressed(new MoveClimberFront(100));
+    buttonA.whenPressed(new MoveClimberFront(0));
+    // 560 ~= PI inches
+    buttonB.toggleWhenPressed(new MoveClimberFront(-560 * 6));
   }
 }
