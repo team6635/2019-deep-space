@@ -3,34 +3,41 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MoveClimberBack extends Command {
-  private double setpoint;
+public class DriveClimber extends Command {
+  private double speed;
 
-  public MoveClimberBack(double setpoint) {
+  public DriveClimber(double speed) {
     requires(Robot.climberBack);
-    this.setpoint = setpoint;
+    this.speed = speed;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.climberBack.setSetpoint(setpoint);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.climberBack.zoom(speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.climberBack.onTarget();
+    return false;
+  }
+
+  @Override
+  public synchronized void cancel() {
+    super.cancel();
+    end();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.climberBack.zoom(0.0);
   }
 
   // Called when another command which requires one or more of the same

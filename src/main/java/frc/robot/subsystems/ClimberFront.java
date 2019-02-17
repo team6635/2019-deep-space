@@ -5,7 +5,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.extensions.WPIUtils;
 
@@ -15,9 +14,6 @@ public class ClimberFront extends PIDSubsystem {
 
   public ClimberFront() {
     super("ClimberFront", 0.015, 0.0, 0.0);
-
-    // liftEncoder.setDistancePerPulse(1.0 / (560.0 / 3.0));
-    // liftEncoder.setDistancePerPulse(1.0 / (560.0 / Math.PI));
 
     setOutputRange(-1.0, 1.0);
     setAbsoluteTolerance(0.01);
@@ -31,12 +27,12 @@ public class ClimberFront extends PIDSubsystem {
 
   @Override
   protected double returnPIDInput() {
-    SmartDashboard.putNumber("Front Climber Encoder", liftEncoder.getDistance());
+    // SmartDashboard.putNumber("Front Climber Encoder", liftEncoder.getDistance());
     return liftEncoder.getDistance();
   }
 
   @Override
   protected void usePIDOutput(double output) {
-    liftMotor.set(output / 3);
+    liftMotor.set(output / 4);
   }
 }

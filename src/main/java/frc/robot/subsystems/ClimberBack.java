@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -13,11 +14,15 @@ public class ClimberBack extends PIDSubsystem {
   private Encoder liftEncoder = WPIUtils.encoderDCH(RobotMap.encoderClimberBack);
   private SpeedController driveMotor = new WPI_VictorSPX(RobotMap.victorClimberDriver);
 
+  private DigitalInput bottomLimitSwitch = new DigitalInput(RobotMap.limitSwitchClimberBackBottom);
+  // private DigitalInput topLimitSwitch = new
+  // DigitalInput(RobotMap.limitSwitchClimberBackTop);
+
   public ClimberBack() {
     super("ClimberBack", 0.015, 0.0, 0.0);
 
-    setAbsoluteTolerance(3);
     setOutputRange(-1.0, 1.0);
+    setAbsoluteTolerance(0.01);
 
     enable();
   }
@@ -33,10 +38,15 @@ public class ClimberBack extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    liftMotor.set(output);
+    // Forward sends the climber down.
+    if ((output > 0 && bottomLimitSwitch.get()) /* || (output < 0 && topLimitSwitch.get()) */) {
+      liftMotor.stopMotor();
+      return;
+    }
+    liftMotor.set(output / 4);
   }
 
   public void zoom(double speed) {
-    driveMotor.set(speed / 2);
+    driveMotor.set(speed / 4);
   }
 }

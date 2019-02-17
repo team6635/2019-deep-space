@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.ClimberBack;
 import frc.robot.subsystems.ClimberFront;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Elevator;
 
 /**
  * This is the main class of the robot. The RoboRIO is set up to automatically
@@ -18,6 +19,7 @@ public class Robot extends TimedRobot {
   public static ClimberBack climberBack = new ClimberBack();
   public static ClimberFront climberFront = new ClimberFront();
   public static DriveTrain driveTrain = new DriveTrain();
+  public static Elevator elevator = new Elevator();
 
   /**
    * This method is called once, when the robot boots up. Any initialization

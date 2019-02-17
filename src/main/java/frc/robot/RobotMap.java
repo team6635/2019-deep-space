@@ -38,8 +38,11 @@ public final class RobotMap {
   public static final int encoderSwerveFR = 2; // and 3
   public static final int encoderSwerveBR = 4; // and 5
   public static final int encoderSwerveBL = 6; // and 7
-  public static final int encoderElevator = 8; // and 9
+  // public static final int encoderElevator = 8; // and 9
   // The NAXV provides additional DIO ports starting at 10.
   public static final int encoderClimberFront = 10; // and 11
   public static final int encoderClimberBack = 12; // and 13
+
+  public static final int limitSwitchClimberBackBottom = 8;
+  // public static final int limitSwitchClimberBackTop = 17;
 }

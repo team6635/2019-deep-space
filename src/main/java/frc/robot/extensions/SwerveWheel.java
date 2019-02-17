@@ -59,6 +59,7 @@ public class SwerveWheel {
         return getCurrentEncoderValue();
       }
     };
+
     pid.setTolerance(1);
   }
 
