@@ -37,6 +37,7 @@ public class MoveClimberBack extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
+    // end();
+    // Robot.climberBack.setSetpoint(Robot.climberBack.getPosition());
   }
 }

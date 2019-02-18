@@ -38,6 +38,7 @@ public class MoveClimberFront extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
+    // end();
+    // Robot.climberFront.setSetpoint(Robot.climberFront.getPosition());
   }
 }

@@ -3,6 +3,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.DriveClimber;
+import frc.robot.commands.DriveClimberTimed;
+import frc.robot.commands.EndgameClimb;
 import frc.robot.commands.MoveClimberBack;
 // import frc.robot.commands.MoveClimberBack;
 import frc.robot.commands.MoveClimberFront;
@@ -28,16 +30,27 @@ public final class OI {
   final JoystickButton buttonLB1 = new JoystickButton(xbox, 5);
   final JoystickButton buttonRB1 = new JoystickButton(xbox, 6);
 
+  final JoystickButton buttonBack1 = new JoystickButton(xbox, 7);
+  final JoystickButton buttonStart1 = new JoystickButton(xbox, 8);
+
   public OI() {
-    // Front climber: 560 ~= PI inches
+    // Front climber: -560 ~= PI inches down
     buttonA1.whenPressed(new MoveClimberFront(0));
-    buttonB1.toggleWhenPressed(new MoveClimberFront(560 * 6.048));
+    // buttonB1.toggleWhenPressed(new MoveClimberFront(-560 * 6.048));
+    // buttonB1.toggleWhenPressed(new MoveClimberFront(-560 * 1.512 * 2 * 2));
+    // buttonB1.toggleWhenPressed(new MoveClimberFront(-3386.88));
+    buttonB1.toggleWhenPressed(new MoveClimberFront(-3623.0));
 
     // Back climber: ? ~= PI inches
     buttonX1.toggleWhenPressed(new MoveClimberBack(0));
-    buttonY1.toggleWhenPressed(new MoveClimberBack(675.5555555 * 6.048));
+    // buttonY1.toggleWhenPressed(new MoveClimberBack(675.5555555 * 6.048));
+    // buttonY1.toggleWhenPressed(new MoveClimberBack(675.5555555 * 1.512 * 2 * 2));
+    buttonY1.toggleWhenPressed(new MoveClimberBack(4085.76));
 
     buttonLB1.whileHeld(new DriveClimber(1));
     buttonRB1.whileHeld(new DriveClimber(-1));
+
+    // buttonBack1.toggleWhenPressed(new DriveClimberTimed(5, 1.0));
+    buttonStart1.whenPressed(new EndgameClimb());
   }
 }

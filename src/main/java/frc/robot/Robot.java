@@ -4,6 +4,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.ClimberBack;
+import frc.robot.subsystems.ClimberBackDriver;
 import frc.robot.subsystems.ClimberFront;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
@@ -16,9 +17,11 @@ public class Robot extends TimedRobot {
   public static OI oi;
 
   // Initialize all subsystems.
+  public static DriveTrain driveTrain = new DriveTrain();
+
   public static ClimberBack climberBack = new ClimberBack();
   public static ClimberFront climberFront = new ClimberFront();
-  public static DriveTrain driveTrain = new DriveTrain();
+  public static ClimberBackDriver climberBackDriver = new ClimberBackDriver();
   public static Elevator elevator = new Elevator();
 
   /**

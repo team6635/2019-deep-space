@@ -27,12 +27,11 @@ public class ClimberFront extends PIDSubsystem {
 
   @Override
   protected double returnPIDInput() {
-    // SmartDashboard.putNumber("Front Climber Encoder", liftEncoder.getDistance());
     return liftEncoder.getDistance();
   }
 
   @Override
   protected void usePIDOutput(double output) {
-    liftMotor.set(output / 4);
+    liftMotor.set(output * 7.0 / 16.0);
   }
 }
