@@ -2,11 +2,9 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.robot.RobotMap;
-import frc.robot.extensions.WPIUtils;
 
 public class Elevator extends PIDSubsystem {
   private SpeedController motor = new WPI_VictorSPX(RobotMap.victorElevator);

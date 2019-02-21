@@ -8,6 +8,7 @@ import frc.robot.subsystems.ClimberBackDriver;
 import frc.robot.subsystems.ClimberFront;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.CargoIntake;
 
 /**
  * This is the main class of the robot. The RoboRIO is set up to automatically
@@ -23,6 +24,7 @@ public class Robot extends TimedRobot {
   public static ClimberFront climberFront = new ClimberFront();
   public static ClimberBackDriver climberBackDriver = new ClimberBackDriver();
   public static Elevator elevator = new Elevator();
+  public static CargoIntake cargoIntake = new CargoIntake();
 
   /**
    * This method is called once, when the robot boots up. Any initialization

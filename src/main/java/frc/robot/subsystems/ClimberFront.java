@@ -16,7 +16,7 @@ public class ClimberFront extends PIDSubsystem {
     super("ClimberFront", 0.015, 0.0, 0.0);
 
     setOutputRange(-1.0, 1.0);
-    setAbsoluteTolerance(0.01);
+    setAbsoluteTolerance(5);
 
     enable();
   }
@@ -32,6 +32,6 @@ public class ClimberFront extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    liftMotor.set(output * 7.0 / 16.0);
+    liftMotor.set(output * 11.0 / 16.0);
   }
 }
