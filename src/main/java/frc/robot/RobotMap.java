@@ -28,6 +28,7 @@ public final class RobotMap {
   public static final int victorClimberLiftFront = 8;
   public static final int victorClimberDriver = 9;
   public static final int victorIntakeTop = 10;
+  public static final int victorHatcher = 11; // TODO
 
   public static final int talonSwervePivotBL = 21;
   public static final int talonSwervePivotFR = 22;
@@ -42,7 +43,5 @@ public final class RobotMap {
   // The NAVX provides additional DIO ports starting at 10.
   public static final int encoderClimberFront = 10; // and 11
   public static final int encoderClimberBack = 12; // and 13
-
-  // public static final int limitSwitchClimberBackBottom = 19;
-  // public static final int limitSwitchClimberBackTop = 15;
+  public static final int encoderHatcher = 14; // 15
 }

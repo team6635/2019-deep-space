@@ -8,6 +8,7 @@ import frc.robot.subsystems.ClimberBackDriver;
 import frc.robot.subsystems.ClimberFront;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.HatchIntake;
 import frc.robot.subsystems.CargoIntake;
 
 /**
@@ -25,6 +26,7 @@ public class Robot extends TimedRobot {
   public static ClimberBackDriver climberBackDriver = new ClimberBackDriver();
   public static Elevator elevator = new Elevator();
   public static CargoIntake cargoIntake = new CargoIntake();
+  public static HatchIntake hatchIntake = new HatchIntake();
 
   /**
    * This method is called once, when the robot boots up. Any initialization
