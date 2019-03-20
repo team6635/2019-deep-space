@@ -17,8 +17,6 @@ public class ClimberFront extends PIDSubsystem {
 
     setOutputRange(-1.0, 1.0);
     setAbsoluteTolerance(5);
-
-    enable();
   }
 
   @Override

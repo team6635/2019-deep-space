@@ -1,18 +1,13 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import frc.robot.RobotMap;
 
 public class Elevator extends PIDSubsystem {
-  private SpeedController motor = new WPI_VictorSPX(RobotMap.victorElevator);
+  // private SpeedController motor = new WPI_VictorSPX(RobotMap.victorElevator);
   // private Encoder encoder = WPIUtils.encoderDCH(RobotMap.encoderElevator);
 
   public Elevator() {
     super("Elevator", 0.015, 0.0, 0.0);
-    enable();
   }
 
   @Override
@@ -32,6 +27,6 @@ public class Elevator extends PIDSubsystem {
   protected void usePIDOutput(double output) {
     // Use output to drive your system, like a motor
     // e.g. yourMotor.set(output);
-    motor.set(output);
+    // motor.set(output);
   }
 }

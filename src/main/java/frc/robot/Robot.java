@@ -18,14 +18,13 @@ import frc.robot.subsystems.CargoIntake;
 public class Robot extends TimedRobot {
   public static OI oi;
 
-  // Initialize all subsystems.
-  public static DriveTrain driveTrain = new DriveTrain();
-
-  public static ClimberBack climberBack = new ClimberBack();
-  public static ClimberFront climberFront = new ClimberFront();
-  public static ClimberBackDriver climberBackDriver = new ClimberBackDriver();
-  public static Elevator elevator = new Elevator();
+  // Initialize subsystems.
   public static CargoIntake cargoIntake = new CargoIntake();
+  public static ClimberBack climberBack = new ClimberBack();
+  public static ClimberBackDriver climberBackDriver = new ClimberBackDriver();
+  public static ClimberFront climberFront = new ClimberFront();
+  public static DriveTrain driveTrain = new DriveTrain();
+  public static Elevator elevator = new Elevator();
   public static HatchIntake hatchIntake = new HatchIntake();
 
   /**
@@ -48,6 +47,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    enableSubsystems();
   }
 
   /**
@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopInit() {
+    enableSubsystems();
   }
 
   /**
@@ -73,6 +74,14 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     // This runs all current commands.
     Scheduler.getInstance().run();
+  }
+
+  /**
+   * This method is called once, when disabled mode begins.
+   */
+  @Override
+  public void disabledInit() {
+    disableSubsystems();
   }
 
   /**
@@ -90,5 +99,21 @@ public class Robot extends TimedRobot {
    */
   private void log() {
     driveTrain.log();
+  }
+
+  private void disableSubsystems() {
+    climberBack.disable();
+    climberFront.disable();
+    driveTrain.disable();
+    elevator.disable();
+    hatchIntake.disable();
+  }
+
+  private void enableSubsystems() {
+    climberBack.enable();
+    climberFront.enable();
+    driveTrain.enable();
+    elevator.enable();
+    hatchIntake.enable();
   }
 }

@@ -3,7 +3,6 @@ package frc.robot.extensions;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.extensions.Smath.Vector2;
 import frc.robot.extensions.WPIUtils.AngleEncoder;
 
@@ -108,8 +107,8 @@ public class SwerveWheel {
     } else {
       enable();
     }
-    // TODO: For debugging only.
-    SmartDashboard.putNumber("setpoint @ " + uTan.getAngle(), setpoint);
+
+    // SmartDashboard.putNumber("setpoint @ " + uTan.getAngle(), setpoint);
     pid.setSetpoint(setpoint);
   }
 
@@ -119,8 +118,8 @@ public class SwerveWheel {
    * @return the normalized current value of the encoder.
    */
   public double getCurrentEncoderValue() {
-    // TODO: For debugging only:
-    SmartDashboard.putNumber("inValue @ " + uTan.getAngle(), pEncoder.getAngle());
+    // SmartDashboard.putNumber("inValue @ " + uTan.getAngle(),
+    // pEncoder.getAngle());
     return pEncoder.getAngle();
   }
 
