@@ -30,9 +30,7 @@ public class HatchIntake extends PIDSubsystem {
    */
   public HatchIntake() {
     super("HatchIntake", 0.0015, 0.0001, 0.01);
-
     hatcher.setInverted(true);
-    setSetpoint(-556); // TODO
   }
 
   @Override
