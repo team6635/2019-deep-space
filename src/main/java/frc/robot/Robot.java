@@ -7,9 +7,7 @@ import frc.robot.subsystems.ClimberBack;
 import frc.robot.subsystems.ClimberBackDriver;
 import frc.robot.subsystems.ClimberFront;
 import frc.robot.subsystems.DriveTrain;
-// import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.HatchIntake;
-import frc.robot.subsystems.CargoIntake;
 
 /**
  * This is the main class of the robot. The RoboRIO is set up to automatically
@@ -19,12 +17,10 @@ public class Robot extends TimedRobot {
   public static OI oi;
 
   // Initialize subsystems.
-  public static CargoIntake cargoIntake = new CargoIntake();
   public static ClimberBack climberBack = new ClimberBack();
   public static ClimberBackDriver climberBackDriver = new ClimberBackDriver();
   public static ClimberFront climberFront = new ClimberFront();
   public static DriveTrain driveTrain = new DriveTrain();
-  // public static Elevator elevator = new Elevator();
   public static HatchIntake hatchIntake = new HatchIntake();
 
   /**
@@ -98,7 +94,6 @@ public class Robot extends TimedRobot {
    * Log interesting stats to the SmartDashboard
    */
   private void log() {
-    driveTrain.log();
   }
 
   /**
@@ -107,9 +102,6 @@ public class Robot extends TimedRobot {
   private void disableSubsystems() {
     climberBack.disable();
     climberFront.disable();
-    driveTrain.disable();
-    // elevator.disable();
-    // hatchIntake.disable();
   }
 
   /**
@@ -118,8 +110,5 @@ public class Robot extends TimedRobot {
   private void enableSubsystems() {
     climberBack.enable();
     climberFront.enable();
-    driveTrain.enable();
-    // elevator.enable(); // TODO: We are not using our elevator rn.
-    // hatchIntake.enable();
   }
 }

@@ -19,35 +19,24 @@ package frc.robot;
  */
 public final class RobotMap {
   public static final int victorElevator = 1;
-  public static final int victorSwerveDriveBR = 2;
-  public static final int victorSwerveDriveFL = 3;
-  public static final int victorSwerveDriveFR = 4;
+  public static final int victorDriveBR = 2;
+  public static final int victorDriveFL = 3;
+  public static final int victorDriveFR = 4;
   public static final int victorClimberLiftBack = 5;
-  public static final int victorSwerveDriveBL = 6;
+  public static final int victorDriveBL = 6;
   public static final int victorIntakeBottom = 7;
   public static final int victorClimberLiftFront = 8;
   public static final int victorClimberDriver = 9;
   public static final int victorIntakeTop = 10;
   public static final int victorHatcher = 11;
 
-  public static final int talonSwervePivotBL = 21;
-  public static final int talonSwervePivotFR = 22;
-  public static final int talonSwervePivotBR = 23;
-  public static final int talonSwervePivotFL = 24;
-
-  public static final int encoderSwerveFL = 0;
-  public static final int encoderSwerveFR = 2;
-  public static final int encoderSwerveBR = 4;
-  public static final int encoderSwerveBL = 6;
   public static final int encoderHatcher = 8;
-  // public static final int encoderElevator = 8;
   public static final int encoderClimberFront = 10;
   public static final int encoderClimberBack = 12;
 
   // Contants
   public static final double kClimberFrontExtended = -1811.5;
-  // public static final double kClimberFrontExtended = -3623.0;
   public static final double kClimberBackExtended = 2043.25;
-  // public static final double kClimberBackExtended = 4085.75;
   public static final double kHatcherPosition = -556;
+  public static final boolean useArcade = true;
 }
