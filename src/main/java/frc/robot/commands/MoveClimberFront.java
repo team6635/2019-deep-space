@@ -15,12 +15,13 @@ public class MoveClimberFront extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.climberFront.setSetpoint(setpoint);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if (Robot.climberFront.getSetpoint() != setpoint)
+      Robot.climberFront.setSetpoint(setpoint);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -38,7 +39,5 @@ public class MoveClimberFront extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    // end();
-    // Robot.climberFront.setSetpoint(Robot.climberFront.getPosition());
   }
 }

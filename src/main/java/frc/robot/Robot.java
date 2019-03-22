@@ -101,6 +101,9 @@ public class Robot extends TimedRobot {
     driveTrain.log();
   }
 
+  /**
+   * Disable subsystems that need enabling (usually those with PID controllers).
+   */
   private void disableSubsystems() {
     climberBack.disable();
     climberFront.disable();
@@ -109,11 +112,14 @@ public class Robot extends TimedRobot {
     hatchIntake.disable();
   }
 
+  /**
+   * Enable subsystems that need enabling (usually those with PID controllers).
+   */
   private void enableSubsystems() {
     climberBack.enable();
     climberFront.enable();
     driveTrain.enable();
-    elevator.enable();
+    // elevator.enable(); // TODO: We are not using our elevator rn.
     hatchIntake.enable();
   }
 }

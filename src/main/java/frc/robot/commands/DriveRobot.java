@@ -27,7 +27,7 @@ public class DriveRobot extends TimedCommand {
     // Call super to pass the time to the TimedCommand constructor. Since that
     // constructor accepts time in the form of seconds, we need to convert our
     // milliseconds to seconds by dividing by 1000.
-    super(ms / 1000);
+    super(ms / 1000.0);
 
     // Subsystem dependencies go here, using the requires method. Since this command
     // only needs the drivetrain in order to drive, that is all we are requiring.
