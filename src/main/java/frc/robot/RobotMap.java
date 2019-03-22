@@ -39,8 +39,15 @@ public final class RobotMap {
   public static final int encoderSwerveFR = 2;
   public static final int encoderSwerveBR = 4;
   public static final int encoderSwerveBL = 6;
-  public static final int encoderElevator = 8;
+  public static final int encoderHatcher = 8;
+  // public static final int encoderElevator = 8;
   public static final int encoderClimberFront = 10;
   public static final int encoderClimberBack = 12;
-  public static final int encoderHatcher = 14;
+
+  // Contants
+  public static final double kClimberFrontExtended = -1811.5;
+  // public static final double kClimberFrontExtended = -3623.0;
+  public static final double kClimberBackExtended = 2043.25;
+  // public static final double kClimberBackExtended = 4085.75;
+  public static final double kHatcherPosition = -556;
 }

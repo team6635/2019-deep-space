@@ -7,7 +7,7 @@ import frc.robot.subsystems.ClimberBack;
 import frc.robot.subsystems.ClimberBackDriver;
 import frc.robot.subsystems.ClimberFront;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Elevator;
+// import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.HatchIntake;
 import frc.robot.subsystems.CargoIntake;
 
@@ -24,7 +24,7 @@ public class Robot extends TimedRobot {
   public static ClimberBackDriver climberBackDriver = new ClimberBackDriver();
   public static ClimberFront climberFront = new ClimberFront();
   public static DriveTrain driveTrain = new DriveTrain();
-  public static Elevator elevator = new Elevator();
+  // public static Elevator elevator = new Elevator();
   public static HatchIntake hatchIntake = new HatchIntake();
 
   /**
@@ -108,8 +108,8 @@ public class Robot extends TimedRobot {
     climberBack.disable();
     climberFront.disable();
     driveTrain.disable();
-    elevator.disable();
-    hatchIntake.disable();
+    // elevator.disable();
+    // hatchIntake.disable();
   }
 
   /**
@@ -120,6 +120,6 @@ public class Robot extends TimedRobot {
     climberFront.enable();
     driveTrain.enable();
     // elevator.enable(); // TODO: We are not using our elevator rn.
-    hatchIntake.enable();
+    // hatchIntake.enable();
   }
 }

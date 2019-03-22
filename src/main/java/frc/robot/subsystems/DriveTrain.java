@@ -28,9 +28,7 @@ public class DriveTrain extends Subsystem {
   SwerveDrive drive = new SwerveDrive(wheelFL, wheelFR, wheelBL, wheelBR);
 
   public void swerveDrive(double x, double y, double z) {
-    // goToHeading(targetAngle);
     drive.swerveDrive(x, y, z);
-    // drive.swerveDrive(x, y, z);
   }
 
   /**
@@ -56,16 +54,5 @@ public class DriveTrain extends Subsystem {
   }
 
   public void log() {
-    // SmartDashboard.putNumber("Heading", getHeading());
   }
-
-  // @Override
-  // protected double returnPIDInput() {
-  // return getHeading();
-  // }
-
-  // @Override
-  // protected void usePIDOutput(double output) {
-  // z = output;
-  // }
 }
