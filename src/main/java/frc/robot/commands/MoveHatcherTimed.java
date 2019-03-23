@@ -3,10 +3,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-public class MoveHatcher extends TimedCommand {
+public class MoveHatcherTimed extends TimedCommand {
   private final double speed;
 
-  public MoveHatcher(double ms, double speed) {
+  public MoveHatcherTimed(double ms, double speed) {
     super(ms / 1000.0);
     requires(Robot.hatchIntake);
     this.speed = speed;
@@ -39,5 +39,6 @@ public class MoveHatcher extends TimedCommand {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

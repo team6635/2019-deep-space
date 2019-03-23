@@ -20,6 +20,11 @@ public class DriveTrain extends Subsystem {
 
   private DifferentialDrive diffDrive = new DifferentialDrive(left, right);
 
+  public DriveTrain() {
+    super();
+    right.setInverted(true);
+  }
+
   public void arcadeDrive(double forward, double rotation) {
     diffDrive.arcadeDrive(forward, rotation);
   }

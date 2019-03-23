@@ -38,5 +38,5 @@ public final class RobotMap {
   public static final double kClimberFrontExtended = -1811.5;
   public static final double kClimberBackExtended = 2043.25;
   public static final double kHatcherPosition = -556;
-  public static final boolean useArcade = true;
+  public static final boolean useArcade = false;
 }

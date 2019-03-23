@@ -28,12 +28,6 @@ public class DriveClimber extends Command {
     return false;
   }
 
-  @Override
-  public synchronized void cancel() {
-    super.cancel();
-    end();
-  }
-
   // Called once after isFinished returns true
   @Override
   protected void end() {

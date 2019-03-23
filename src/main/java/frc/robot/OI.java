@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveClimber;
-import frc.robot.commands.MoveHatcher;
+import frc.robot.commands.MoveHatcherTimed;
 import frc.robot.commands.RetractBackClimber;
 import frc.robot.commands.RetractFrontClimber;
 
@@ -49,6 +49,6 @@ public final class OI {
     button_LB.whileHeld(new DriveClimber(1));
     button_RB.whileHeld(new DriveClimber(-1));
 
-    button_Center_Right.whenPressed(new MoveHatcher(250, 1));
+    button_Center_Right.whenPressed(new MoveHatcherTimed(250, 1));
   }
 }

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.robot.RobotMap;
-import frc.robot.extensions.WPIUtils;
+import frc.robot.WPIUtils;
 
 public class ClimberBack extends PIDSubsystem {
   private SpeedController liftMotor = new WPI_VictorSPX(RobotMap.victorClimberLiftBack);
@@ -30,7 +30,7 @@ public class ClimberBack extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    liftMotor.set(output * 11.0 / 16.0);
+    liftMotor.set(output * 1.0 / 3.0);
     // liftMotor.set(output * 1.0 / 4.0);
   }
 }
