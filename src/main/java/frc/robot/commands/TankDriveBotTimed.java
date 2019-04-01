@@ -3,18 +3,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-public class DriveClimberTimed extends TimedCommand {
-  private double speed;
+public class TankDriveBotTimed extends TimedCommand {
+  private double leftSpeed, rightSpeed;
 
-  public DriveClimberTimed(double timeout, double speed) {
+  public TankDriveBotTimed(double timeout, double leftSpeed, double rightSpeed) {
     super(timeout);
-    requires(Robot.climberBackDriver);
-    this.speed = speed;
-  }
-
-  @Override
-  protected boolean isFinished() {
-    return isTimedOut();
+    this.leftSpeed = leftSpeed;
+    this.rightSpeed = rightSpeed;
   }
 
   // Called just before this Command runs the first time
@@ -25,19 +20,13 @@ public class DriveClimberTimed extends TimedCommand {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.climberBackDriver.setSpeed(speed);
+    Robot.driveTrain.tankDrive(leftSpeed, rightSpeed);
   }
 
   // Called once after timeout
   @Override
   protected void end() {
-    Robot.climberBackDriver.stop();
-  }
-
-  @Override
-  public synchronized void cancel() {
-    super.cancel();
-    end();
+    Robot.driveTrain.stop();
   }
 
   // Called when another command which requires one or more of the same

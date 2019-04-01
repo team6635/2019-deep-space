@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
 public class SuckCargo extends TimedCommand {
-  public SuckCargo(double timeout) {
-    super(timeout);
-    requires(Robot.cargoIntake);
+  public SuckCargo(double ms) {
+    super(ms / 1000.0);
+    requires(Robot.cargoHandler);
   }
 
   // Called just before this Command runs the first time
@@ -17,13 +17,13 @@ public class SuckCargo extends TimedCommand {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoIntake.setBoth(1);
+    Robot.cargoHandler.setSpeed(-1.0);
   }
 
-  // Called once after timeout
+  // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.cargoIntake.setBoth(0);
+    Robot.cargoHandler.stop();
   }
 
   // Called when another command which requires one or more of the same
