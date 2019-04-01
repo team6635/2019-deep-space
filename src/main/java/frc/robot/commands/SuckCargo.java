@@ -1,11 +1,12 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-public class RetractBackClimber extends Command {
-  public RetractBackClimber() {
-    requires(Robot.climberBack);
+public class SuckCargo extends TimedCommand {
+  public SuckCargo(double ms) {
+    super(ms / 1000.0);
+    requires(Robot.cargoHandler);
   }
 
   // Called just before this Command runs the first time
@@ -16,20 +17,13 @@ public class RetractBackClimber extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.climberBack.getSetpoint() != 0)
-      Robot.climberBack.setSetpoint(0);
-  }
-
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return Robot.climberBack.getSetpoint() == 0 && Robot.climberBack.onTarget();
+    Robot.cargoHandler.setSpeed(-1.0);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.climberBack.setSetpoint(Robot.climberBack.getPosition());
+    Robot.cargoHandler.stop();
   }
 
   // Called when another command which requires one or more of the same

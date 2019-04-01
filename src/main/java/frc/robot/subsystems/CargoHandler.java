@@ -2,12 +2,11 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-public class ClimberBackDriver extends Subsystem {
-  private SpeedController motor = new WPI_VictorSPX(RobotMap.victorClimberDriver);
+public class CargoHandler extends Subsystem {
+  private WPI_VictorSPX motor = new WPI_VictorSPX(RobotMap.cargoMotor);
 
   public void setSpeed(double speed) {
     motor.set(speed);

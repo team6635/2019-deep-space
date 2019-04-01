@@ -3,9 +3,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RetractFrontClimber extends Command {
-  public RetractFrontClimber() {
-    requires(Robot.climberFront);
+public class TankDriveBot extends Command {
+  private double leftSpeed, rightSpeed;
+
+  public TankDriveBot(double leftSpeed, double rightSpeed) {
+    requires(Robot.driveTrain);
+    this.leftSpeed = leftSpeed;
+    this.rightSpeed = rightSpeed;
   }
 
   // Called just before this Command runs the first time
@@ -16,20 +20,19 @@ public class RetractFrontClimber extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.climberFront.getSetpoint() != 0)
-      Robot.climberFront.setSetpoint(0);
+    Robot.driveTrain.tankDrive(leftSpeed, rightSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.climberFront.getSetpoint() == 0 && Robot.climberFront.onTarget();
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.climberFront.setSetpoint(Robot.climberFront.getPosition());
+    Robot.driveTrain.stop();
   }
 
   // Called when another command which requires one or more of the same
