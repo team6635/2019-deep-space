@@ -3,9 +3,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DriveRobotManual extends Command {
-  public DriveRobotManual() {
-    requires(Robot.driveTrain);
+public class SetSucker extends Command {
+  private double speed;
+
+  public SetSucker(double speed) {
+    requires(Robot.cargoHandler);
+    this.speed = speed;
   }
 
   @Override
@@ -14,7 +17,7 @@ public class DriveRobotManual extends Command {
 
   @Override
   protected void execute() {
-    Robot.driveTrain.tankDrive(-Robot.oi.leftStick.getY(), -Robot.oi.rightStick.getY());
+    Robot.cargoHandler.setSpeed(speed);
   }
 
   @Override
@@ -24,7 +27,7 @@ public class DriveRobotManual extends Command {
 
   @Override
   protected void end() {
-    Robot.driveTrain.stop();
+    Robot.cargoHandler.stop();
   }
 
   @Override

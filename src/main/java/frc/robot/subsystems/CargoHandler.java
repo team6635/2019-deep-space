@@ -8,6 +8,11 @@ import frc.robot.RobotMap;
 public class CargoHandler extends Subsystem {
   private WPI_VictorSPX motor = new WPI_VictorSPX(RobotMap.cargoMotor);
 
+  /**
+   * Negative sucks, positive spits.
+   * 
+   * @param speed the speed to set the motor to.
+   */
   public void setSpeed(double speed) {
     motor.set(speed);
   }

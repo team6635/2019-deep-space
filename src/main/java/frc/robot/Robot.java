@@ -20,7 +20,8 @@ public class Robot extends TimedRobot {
     // Robot class' construction.
     oi = new OI();
 
-    // Start camera stream
+    // Start camera streams
+    CameraServer.getInstance().startAutomaticCapture();
     CameraServer.getInstance().startAutomaticCapture();
   }
 

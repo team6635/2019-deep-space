@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -18,11 +19,15 @@ public class DriveTrain extends Subsystem {
 
   private DifferentialDrive drive;
 
-  public boolean useArcadeDrive = false;
-
   public DriveTrain() {
+    frontLeft.setNeutralMode(NeutralMode.Brake);
+    frontRight.setNeutralMode(NeutralMode.Brake);
+    backLeft.setNeutralMode(NeutralMode.Brake);
+    backRight.setNeutralMode(NeutralMode.Brake);
+
     leftMotors = new SpeedControllerGroup(frontLeft, backLeft);
     rightMotors = new SpeedControllerGroup(frontRight, backRight);
+
     drive = new DifferentialDrive(leftMotors, rightMotors);
     // drive.setDeadband(0.09);
   }
