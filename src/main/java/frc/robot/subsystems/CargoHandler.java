@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 public class CargoHandler extends Subsystem {
-  private WPI_VictorSPX motor = new WPI_VictorSPX(RobotMap.cargoMotor);
+  private WPI_VictorSPX motor = new WPI_VictorSPX(RobotMap.victorSPX_CargoMotor);
 
   /**
    * Negative sucks, positive spits.

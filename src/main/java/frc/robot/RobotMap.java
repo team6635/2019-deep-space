@@ -1,10 +1,10 @@
 package frc.robot;
 
 public final class RobotMap {
-  // ports
-  public static final int frontRight = 1;
-  public static final int backRight = 2;
-  public static final int backLeft = 3;
-  public static final int frontLeft = 4;
-  public static final int cargoMotor = 5;
+  // CAN IDs
+  public static final int victorSPX_FrontRight = 1;
+  public static final int victorSPX_BackRight = 2;
+  public static final int victorSPX_BackLeft = 3;
+  public static final int victorSPX_FrontLeft = 4;
+  public static final int victorSPX_CargoMotor = 5;
 }

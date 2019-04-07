@@ -16,10 +16,11 @@
   },
   "wpilib.online": true,
   "editor.wordWrap": "on",
-  "editor.wrappingIndent": "none",
+  "editor.wrappingIndent": "deepIndent",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
   "editor.insertSpaces": true,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "files.insertFinalNewline": true
 }
